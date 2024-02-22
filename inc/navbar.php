@@ -19,9 +19,9 @@
                 <a class="navbar-link"> Equipos Claro</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=equi_new" class="navbar-item">Nuevo</a>
+                    <a href="index.php?vista=equi_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=equi_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
 
@@ -29,8 +29,8 @@
                 <a class="navbar-link">Tecnicos y Auxiliares</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=category_new" class="navbar-item">Nueva</a>
-                    <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=user_new" class="navbar-item">Nueva</a>
+                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
                     <a href="index.php?vista=category_list" class="navbar-item">Registro Herramientas</a>
                     <a href="index.php?vista=category_list" class="navbar-item">Lista Herramientas</a>
                     <a href="index.php?vista=category_list" class="navbar-item">Registro Equipos</a>
@@ -52,9 +52,9 @@
                 <a class="navbar-link">Dotaciones</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=dot_new" class="navbar-item">Nuevo</a>
+                    <a href="index.php?vista=dot_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=dot_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
 

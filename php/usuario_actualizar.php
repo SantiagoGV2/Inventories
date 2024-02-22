@@ -4,17 +4,17 @@
 	require_once "main.php";
 
     /*== Almacenando id ==*/
-    $id=limpiar_cadena($_POST['usuario_id']);
+    $cedu=limpiar_cadena($_POST['emple_cedula']);
 
     /*== Verificando usuario ==*/
 	$check_usuario=conexion();
-	$check_usuario=$check_usuario->query("SELECT * FROM usuario WHERE usuario_id='$id'");
+	$check_usuario=$check_usuario->query("SELECT * FROM empleados WHERE emple_cedula ='$cedu'");
 
     if($check_usuario->rowCount()<=0){
     	echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El usuario no existe en el sistema
+                El Tecnico no existe en el sistema
             </div>
         ';
         exit();
@@ -24,12 +24,12 @@
     $check_usuario=null;
 
 
-    /*== Almacenando datos del administrador ==*/
+    /*== Almacenando datos del administrador ==
     $admin_usuario=limpiar_cadena($_POST['administrador_usuario']);
     $admin_clave=limpiar_cadena($_POST['administrador_clave']);
 
 
-    /*== Verificando campos obligatorios del administrador ==*/
+    /*== Verificando campos obligatorios del administrador ==
     if($admin_usuario=="" || $admin_clave==""){
         echo '
             <div class="notification is-danger is-light">
@@ -40,7 +40,7 @@
         exit();
     }
 
-    /*== Verificando integridad de los datos (admin) ==*/
+    /*== Verificando integridad de los datos (admin) ==
     if(verificar_datos("[a-zA-Z0-9]{4,20}",$admin_usuario)){
         echo '
             <div class="notification is-danger is-light">
@@ -62,7 +62,7 @@
     }
 
 
-    /*== Verificando el administrador en DB ==*/
+    /*== Verificando el administrador en DB ==
     $check_admin=conexion();
     $check_admin=$check_admin->query("SELECT usuario_usuario,usuario_clave FROM usuario WHERE usuario_usuario='$admin_usuario' AND usuario_id='".$_SESSION['id']."'");
     if($check_admin->rowCount()==1){
@@ -90,20 +90,22 @@
     }
     $check_admin=null;
 
-
+*/
     /*== Almacenando datos del usuario ==*/
-    $nombre=limpiar_cadena($_POST['usuario_nombre']);
-    $apellido=limpiar_cadena($_POST['usuario_apellido']);
+    $cedula = limpiar_cadena($_POST['emple_cedula']);
+    $nombre=limpiar_cadena($_POST['emple_nombre']);
+    $primerapellido=limpiar_cadena($_POST['emple_primer_apellido']);
 
-    $usuario=limpiar_cadena($_POST['usuario_usuario']);
-    $email=limpiar_cadena($_POST['usuario_email']);
+    $segundoapellido=limpiar_cadena($_POST['emple_segundo_apellido']);
+    $estado=limpiar_cadena($_POST['emple_estado']);
 
-    $clave_1=limpiar_cadena($_POST['usuario_clave_1']);
-    $clave_2=limpiar_cadena($_POST['usuario_clave_2']);
+    $cargo=limpiar_cadena($_POST['emple_cargo']);
+    $telefono=limpiar_cadena($_POST['emple_telefono']);
+    $categoria=limpiar_cadena($_POST['dot_cod']);
 
 
     /*== Verificando campos obligatorios del usuario ==*/
-    if($nombre=="" || $apellido=="" || $usuario==""){
+    if($cedula=="" ||$nombre=="" || $primerapellido=="" || $segundoapellido==""|| $estado==""||$cargo=="" || $telefono==""|| $categoria== ""|| $categoria== ""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -115,7 +117,63 @@
 
 
     /*== Verificando integridad de los datos (usuario) ==*/
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}",$nombre)){
+    if(verificar_datos("[/^[0-9]+$/]{1,11}",$cedula)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,100}",$nombre)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    
+
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$primerapellido)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El APELLIDO no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$segundoapellido)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$estado)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$cargo)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[0-9]+$/]{1,11}",$telefono)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -125,28 +183,8 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}",$apellido)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El APELLIDO no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
 
-    if(verificar_datos("[a-zA-Z0-9]{4,20}",$usuario)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El USUARIO no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
-
-
-    /*== Verificando email ==*/
+    /*== Verificando email ==
     if($email!="" && $email!=$datos['usuario_email']){
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             $check_email=conexion();
@@ -173,10 +211,10 @@
     }
 
 
-    /*== Verificando usuario ==*/
-    if($usuario!=$datos['usuario_usuario']){
+    /*== Verificando usuario ==
+    if($usuario!=$datos['emple_cedula']){
 	    $check_usuario=conexion();
-	    $check_usuario=$check_usuario->query("SELECT usuario_usuario FROM usuario WHERE usuario_usuario='$usuario'");
+	    $check_usuario=$check_usuario->query("SELECT emple_cedula FROM empleados WHERE emple_cedula='$cedu'");
 	    if($check_usuario->rowCount()>0){
 	        echo '
 	            <div class="notification is-danger is-light">
@@ -188,9 +226,9 @@
 	    }
 	    $check_usuario=null;
     }
+    */
 
-
-    /*== Verificando claves ==*/
+    /*== Verificando claves ==
     if($clave_1!="" || $clave_2!=""){
     	if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_1) || verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_2)){
 	        echo '
@@ -216,19 +254,36 @@
     }else{
     	$clave=$datos['usuario_clave'];
     }
-
+    /*== Verificando categoria ==*/
+    if($categoria!=$datos['dot_cod']){
+	    $check_categoria=conexion();
+	    $check_categoria=$check_categoria->query("SELECT dot_cod FROM dotaciones WHERE dot_cod='$categoria'");
+	    if($check_categoria->rowCount()<=0){
+	        echo '
+	            <div class="notification is-danger is-light">
+	                <strong>¡Ocurrio un error inesperado!</strong><br>
+	                La categoría seleccionada no existe
+	            </div>
+	        ';
+	        exit();
+	    }
+	    $check_categoria=null;
+    }
 
     /*== Actualizar datos ==*/
     $actualizar_usuario=conexion();
-    $actualizar_usuario=$actualizar_usuario->prepare("UPDATE usuario SET usuario_nombre=:nombre,usuario_apellido=:apellido,usuario_usuario=:usuario,usuario_clave=:clave,usuario_email=:email WHERE usuario_id=:id");
+    $actualizar_usuario=$actualizar_usuario->prepare("UPDATE empleados SET emple_cedula=:cedula,emple_nombre=:nombre,emple_primer_apellido=:primer_apellido,emple_segundo_apellido=:segundo_apellido,emple_estado=:estado,emple_cargo=:cargo,emple_telefono=:telefono, dot_cod=:categoria WHERE emple_cedula=:cedu");
 
     $marcadores=[
+        ":cedula"=>$cedula,
         ":nombre"=>$nombre,
-        ":apellido"=>$apellido,
-        ":usuario"=>$usuario,
-        ":clave"=>$clave,
-        ":email"=>$email,
-        ":id"=>$id
+        ":primer_apellido"=>$primerapellido,
+        ":segundo_apellido"=>$segundoapellido,
+        ":estado"=>$estado,
+        ":cargo"=>$cargo,
+        ":telefono"=>$telefono,
+        ":categoria"=>$categoria,
+        ":cedu"=>$cedula
     ];
 
     if($actualizar_usuario->execute($marcadores)){

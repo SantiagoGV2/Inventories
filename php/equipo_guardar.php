@@ -3,16 +3,15 @@
 	require_once "main.php";
 
 	/*== Almacenando datos ==*/
-	$cod=limpiar_cadena($_POST['her_cod']);
-	
-
-	$descripcion=limpiar_cadena($_POST['her_descripcion']);
-	$estado=limpiar_cadena($_POST['her_estado']);
-	$fecha_entrada=limpiar_cadena($_POST['her_fecha_entrada']);
-    $fecha_entrega=limpiar_cadena($_POST['her_fecha_entrega']);
+	$seri=limpiar_cadena($_POST['equi_serial']);
+	$numerosalida=limpiar_cadena($_POST['equi_numero_salida']);
+	$fecha_entrega=limpiar_cadena($_POST['equi_fecha_entrega']);
+	$descripcion=limpiar_cadena($_POST['equi_descripcion']);
+    $estado=limpiar_cadena($_POST['equi_estado']);
+    
 
 	/*== Verificando campos obligatorios ==*/
-    if($cod=="" || $descripcion=="" || $estado=="" || $fecha_entrada=="" || $fecha_entrega==""){
+    if($seri=="" || $numerosalida=="" || $fecha_entrega==""|| $descripcion=="" || $estado==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -24,68 +23,69 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,15}",$cod)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,50}",$seri)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El CODIGO de BARRAS no coincide con el formato solicitado
+                El SERIAL no coincide con el formato solicitado
             </div>
         ';
         exit();
     }
-    
-    
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$descripcion)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$numerosalida)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                El NUMERO DE SALIDA no coincide con el formato solicitado
             </div>
         ';
         exit();
     }
 
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$estado)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
-    if(verificar_datos("[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})",$fecha_entrada)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
     if(verificar_datos("[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})",$fecha_entrega)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA FECHA no coincide con el formato solicitado
             </div>
         ';
         exit();
     }
 
-    /*== Verificando codigo ==*/
-    $check_codigo=conexion();
-    $check_codigo=$check_codigo->query("SELECT her_cod FROM herramientas WHERE her_cod='$cod'");
-    if($check_codigo->rowCount()>0){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,150}",$descripcion)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El CODIGO de BARRAS ingresado ya se encuentra registrado, por favor elija otro
+                LA DESCRIPCION no coincide con el formato solicitado
             </div>
         ';
         exit();
     }
-    $check_codigo=null;
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$estado)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                LA DESCRIPCION no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+
+    /*== Verificando serial ==*/
+
+	    $check_serial=conexion();
+	    $check_serial=$check_serial->query("SELECT equi_serial FROM equipos WHERE equi_serial='$seri'");
+	    if($check_serial->rowCount()>0){
+	        echo '
+	            <div class="notification is-danger is-light">
+	                <strong>¡Ocurrio un error inesperado!</strong><br>
+	                El SERIAL ingresado ya se encuentra registrado, por favor elija otro
+	            </div>
+	        ';
+	        exit();
+	    }
+	    $check_serial=null;
+
 
 
     /*== Verificando nombre ==
@@ -198,24 +198,24 @@
 */
 
 	/*== Guardando datos ==*/
-    $guardar_producto=conexion();
-    $guardar_producto=$guardar_producto->prepare("INSERT INTO herramientas(her_cod,her_descripcion,her_estado,her_fecha_entrada,her_fecha_entrega) VALUES(:codigo,:descripcion,:estado,:fecha_entrada,:fecha_entrega)");
+    $guardar_equipo=conexion();
+    $guardar_equipo=$guardar_equipo->prepare("INSERT INTO equipos(equi_serial,equi_numero_salida,equi_fecha_entrega,equi_descripcion,equi_estado) VALUES(:serial1,:numero_salida,:fecha_entrega,:descripcion,:estado)");
 
     $marcadores=[
-        ":codigo"=>$cod,
+        ":serial1"=>$seri,
+        ":numero_salida"=>$numerosalida,
+        ":fecha_entrega"=>$fecha_entrega,
         ":descripcion"=>$descripcion,
-        ":estado"=>$estado,
-        ":fecha_entrada"=>$fecha_entrada,
-        ":fecha_entrega"=>$fecha_entrega
+        ":estado"=>$estado
     ];
 
-    $guardar_producto->execute($marcadores);
+    $guardar_equipo->execute($marcadores);
 
-    if($guardar_producto->rowCount()==1){
+    if($guardar_equipo->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡PRODUCTO REGISTRADO!</strong><br>
-                El producto se registro con exito
+                <strong>¡EQUIPO REGISTRADA!</strong><br>
+                La dotacion se registro con exito
             </div>
         ';
     }else{
@@ -225,5 +225,5 @@
         </div>
     ';
     }
-    $guardar_producto=null;
+    $guardar_equipo=null;
    

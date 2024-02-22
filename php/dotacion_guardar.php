@@ -3,16 +3,16 @@
 	require_once "main.php";
 
 	/*== Almacenando datos ==*/
-	$cod=limpiar_cadena($_POST['her_cod']);
-	
+	$cod=limpiar_cadena($_POST['dot_cod']);
 
-	$descripcion=limpiar_cadena($_POST['her_descripcion']);
-	$estado=limpiar_cadena($_POST['her_estado']);
-	$fecha_entrada=limpiar_cadena($_POST['her_fecha_entrada']);
-    $fecha_entrega=limpiar_cadena($_POST['her_fecha_entrega']);
+	$descripcion=limpiar_cadena($_POST['dot_descripcion']);
+    $fecha_entrega=limpiar_cadena($_POST['dot_fecha_entrega']);
+	$estado=limpiar_cadena($_POST['dot_estado']);
+	$observacion=limpiar_cadena($_POST['dot_observacion']);
+    
 
 	/*== Verificando campos obligatorios ==*/
-    if($cod=="" || $descripcion=="" || $estado=="" || $fecha_entrada=="" || $fecha_entrega==""){
+    if($cod=="" || $descripcion=="" || $fecha_entrega=="" || $estado=="" || $observacion==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -24,7 +24,7 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,15}",$cod)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,50}",$cod)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -33,37 +33,37 @@
         ';
         exit();
     }
-    
-    
     if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$descripcion)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                El CODIGO de BARRAS no coincide con el formato solicitado
             </div>
         ';
         exit();
     }
 
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$estado)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
-    if(verificar_datos("[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})",$fecha_entrada)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
+    
     if(verificar_datos("[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})",$fecha_entrega)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$estado)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El STOCK no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,150}",$observacion)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -75,12 +75,12 @@
 
     /*== Verificando codigo ==*/
     $check_codigo=conexion();
-    $check_codigo=$check_codigo->query("SELECT her_cod FROM herramientas WHERE her_cod='$cod'");
+    $check_codigo=$check_codigo->query("SELECT dot_cod FROM dotaciones WHERE dot_cod='$cod'");
     if($check_codigo->rowCount()>0){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El CODIGO de BARRAS ingresado ya se encuentra registrado, por favor elija otro
+                El CODIGO ingresado ya se encuentra registrado, por favor elija otro
             </div>
         ';
         exit();
@@ -199,14 +199,14 @@
 
 	/*== Guardando datos ==*/
     $guardar_producto=conexion();
-    $guardar_producto=$guardar_producto->prepare("INSERT INTO herramientas(her_cod,her_descripcion,her_estado,her_fecha_entrada,her_fecha_entrega) VALUES(:codigo,:descripcion,:estado,:fecha_entrada,:fecha_entrega)");
+    $guardar_producto=$guardar_producto->prepare("INSERT INTO dotaciones(dot_cod,dot_descripcion,dot_fecha_entrega,dot_estado,dot_observacion) VALUES(:codigo,:descripcion,:fecha_entrega,:estado,:observacion)");
 
     $marcadores=[
         ":codigo"=>$cod,
         ":descripcion"=>$descripcion,
+        ":fecha_entrega"=>$fecha_entrega,
         ":estado"=>$estado,
-        ":fecha_entrada"=>$fecha_entrada,
-        ":fecha_entrega"=>$fecha_entrega
+        ":observacion"=>$observacion
     ];
 
     $guardar_producto->execute($marcadores);
@@ -214,8 +214,8 @@
     if($guardar_producto->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡PRODUCTO REGISTRADO!</strong><br>
-                El producto se registro con exito
+                <strong>¡DOTACION REGISTRADA!</strong><br>
+                La dotacion se registro con exito
             </div>
         ';
     }else{

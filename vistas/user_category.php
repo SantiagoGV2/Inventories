@@ -12,11 +12,11 @@
             <h2 class="title has-text-centered">Categorías</h2>
             <?php
                 $categorias=conexion();
-                $categorias=$categorias->query("SELECT * FROM categoria");
+                $categorias=$categorias->query("SELECT * FROM dotaciones");
                 if($categorias->rowCount()>0){
                     $categorias=$categorias->fetchAll();
                     foreach($categorias as $row){
-                        echo '<a href="index.php?vista=product_category&category_id='.$row['categoria_id'].'" class="button is-link is-inverted is-fullwidth">'.$row['categoria_nombre'].'</a>';
+                        echo '<a href="index.php?vista=product_category&category_id='.$row['dot_cod'].'" class="button is-link is-inverted is-fullwidth">'.$row['dot_cod'].'</a>';
                     }
                 }else{
                     echo '<p class="has-text-centered" >No hay categorías registradas</p>';
@@ -26,26 +26,26 @@
         </div>
         <div class="column">
             <?php
-                $categoria_id = (isset($_GET['category_id'])) ? $_GET['category_id'] : 0;
+                $categoria_id = (isset($_GET['dot_cod'])) ? $_GET['dot_cod'] : 0;
 
                 /*== Verificando categoria ==*/
                 $check_categoria=conexion();
-                $check_categoria=$check_categoria->query("SELECT * FROM categoria WHERE categoria_id='$categoria_id'");
+                $check_categoria=$check_categoria->query("SELECT * FROM dotaciones WHERE dot_cod='$categoria_id'");
 
                 if($check_categoria->rowCount()>0){
 
                     $check_categoria=$check_categoria->fetch();
 
                     echo '
-                        <h2 class="title has-text-centered">'.$check_categoria['categoria_nombre'].'</h2>
-                        <p class="has-text-centered pb-6" >'.$check_categoria['categoria_ubicacion'].'</p>
+                        <h2 class="title has-text-centered">'.$check_categoria['dot_cod'].'</h2>
+                        <p class="has-text-centered pb-6" >'.$check_categoria['dot_descripcion'].'</p>
                     ';
 
                     require_once "./php/main.php";
 
                     # Eliminar producto #
                     if(isset($_GET['product_id_del'])){
-                        require_once "./php/producto_eliminar.php";
+                        require_once "./php/usuario_eliminar.php";
                     }
 
                     if(!isset($_GET['page'])){
@@ -58,12 +58,12 @@
                     }
 
                     $pagina=limpiar_cadena($pagina);
-                    $url="index.php?vista=product_category&category_id=$categoria_id&page="; /* <== */
+                    $url="index.php?vista=user_category&dot_cod=$categoria_id&page="; /* <== */
                     $registros=15;
                     $busqueda="";
 
                     # Paginador producto #
-                    require_once "./php/producto_lista.php";
+                    require_once "./php/usuario_lista.php";
 
                 }else{
                     echo '<h2 class="has-text-centered title" >Seleccione una categoría para empezar</h2>';

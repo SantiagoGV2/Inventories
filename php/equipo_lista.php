@@ -4,15 +4,15 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM categoria WHERE categoria_nombre LIKE '%$busqueda%' OR categoria_ubicacion LIKE '%$busqueda%' ORDER BY categoria_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM equipos WHERE equi_serial AND equi_serial LIKE '%$busqueda%' OR equi_serial LIKE '%$busqueda%' OR equi_descripcion LIKE '%$busqueda%' OR equi_numero_salida LIKE '%$busqueda%')) ORDER BY equi_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(categoria_id) FROM categoria WHERE categoria_nombre LIKE '%$busqueda%' OR categoria_ubicacion LIKE '%$busqueda%'";
+		$consulta_total="SELECT COUNT(equi_serial) FROM equipos WHERE equi_serial AND (equi_serial LIKE '%$busqueda%' OR equi_descripcion LIKE '%$busqueda%' OR equi_numero_serial LIKE '%$busqueda%'))";
 
 	}else{
 
-		$consulta_datos="SELECT * FROM categoria ORDER BY categoria_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM equipos WHERE equi_serial ORDER BY equi_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(categoria_id) FROM categoria";
+		$consulta_total="SELECT COUNT(equi_serial) FROM equipos WHERE equi_serial";
 		
 	}
 
@@ -31,10 +31,11 @@
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
                 <tr class="has-text-centered">
-                	<th>#</th>
-                    <th>Nombre</th>
-                    <th>Ubicación</th>
-                    <th>Productos</th>
+                	<th>Serial</th>
+                    <th>Numero de Salida</th>
+                    <th>Fecha Entrega</th>
+                    <th>Descripcion</th>
+					<th>Estado</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -47,28 +48,26 @@
 		foreach($datos as $rows){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td>'.$contador.'</td>
-                    <td>'.$rows['categoria_nombre'].'</td>
-                    <td>'.substr($rows['categoria_ubicacion'],0,25).'</td>
+					<td>'.$rows['equi_serial'].'</td>
+                    <td>'.$rows['equi_numero_salida'].'</td>
+                    <td>'.$rows['equi_fecha_entrega'].'</td>
+					<td>'.$rows['equi_descripcion'].'</td>
+					<td>'.$rows['equi_estado'].'</td>
                     <td>
-                        <a href="index.php?vista=product_category&category_id='.$rows['categoria_id'].'" class="button is-link is-rounded is-small">Ver productos</a>
+					<a href="index.php?vista=equi_update&dotacion_id_up='.$rows['equi_serial'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="index.php?vista=category_update&category_id_up='.$rows['categoria_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
-                    </td>
-                    <td>
-                        <a href="'.$url.$pagina.'&category_id_del='.$rows['categoria_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+					<a href="'.$url.$pagina.'&equi_id_del='.$rows['equi_serial'].'" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>
                 </tr>
             ';
-            $contador++;
 		}
 		$pag_final=$contador-1;
 	}else{
 		if($total>=1){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td colspan="5">
+					<td colspan="7">
 						<a href="'.$url.'1" class="button is-link is-rounded is-small mt-4 mb-4">
 							Haga clic acá para recargar el listado
 						</a>
@@ -78,7 +77,7 @@
 		}else{
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td colspan="5">
+					<td colspan="7">
 						No hay registros en el sistema
 					</td>
 				</tr>
@@ -90,7 +89,7 @@
 	$tabla.='</tbody></table></div>';
 
 	if($total>0 && $pagina<=$Npaginas){
-		$tabla.='<p class="has-text-right">Mostrando categorías <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
+		$tabla.='<p class="has-text-right">Mostrando Equipos <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
 	}
 
 	$conexion=null;

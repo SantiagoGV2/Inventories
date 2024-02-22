@@ -4,15 +4,15 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM herramientas WHERE her_cod AND her_cod LIKE '%$busqueda%' OR her_fecha_entrada LIKE '%$busqueda%' OR her_fecha_entrega LIKE '%$busqueda%')) ORDER BY her_descripcion ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM dotaciones WHERE dot_cod AND dot_cod LIKE '%$busqueda%' OR dot_cod LIKE '%$busqueda%' OR dot_estado LIKE '%$busqueda%' OR dot_fecha_entrega LIKE '%$busqueda%' OR dot_descripcion LIKE '%$busqueda%')) ORDER BY dot_estado ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(her_cod) FROM herramientas WHERE her_cod AND (her_cod LIKE '%$busqueda%' OR her_fecha_entrada LIKE '%$busqueda%' OR her_fecha_entrega LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(dot_cod) FROM dotaciones WHERE dot_cod AND (dot_cod LIKE '%$busqueda%' OR dot_estado LIKE '%$busqueda%' OR dot_fecha_entrega LIKE '%$busqueda%' OR dot_observacion LIKE '%$busqueda%' OR dot_descripcion LIKE '%$busqueda%'))";
 
 	}else{
 
-		$consulta_datos="SELECT * FROM herramientas WHERE her_cod ORDER BY her_descripcion ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM dotaciones WHERE dot_cod ORDER BY dot_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(her_cod) FROM herramientas WHERE her_cod";
+		$consulta_total="SELECT COUNT(dot_cod) FROM dotaciones WHERE dot_cod";
 		
 	}
 
@@ -32,10 +32,10 @@
             <thead>
                 <tr class="has-text-centered">
                 	<th>#Codigo</th>
-                    <th>Descripcion</th>
+                    <th>#Descripcion</th>
+                    <th>Fecha Entrega</th>
                     <th>Estado</th>
-                    <th>Fecha Entrada</th>
-					<th>Fecha Entrega</th>
+                    <th>Observacion</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -48,16 +48,16 @@
 		foreach($datos as $rows){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td>'.$rows['her_cod'].'</td>
-                    <td>'.$rows['her_descripcion'].'</td>
-                    <td>'.$rows['her_estado'].'</td>
-                    <td>'.$rows['her_fecha_entrada'].'</td>
-					<td>'.$rows['her_fecha_entrega'].'</td>
+					<td>'.$rows['dot_cod'].'</td>
+                    <td>'.$rows['dot_descripcion'].'</td>
+                    <td>'.$rows['dot_fecha_entrega'].'</td>
+					<td>'.$rows['dot_estado'].'</td>
+                    <td>'.$rows['dot_observacion'].'</td>
                     <td>
-					<a href="index.php?vista=product_update&product_id_up='.$rows['her_cod'].'" class="button is-success is-rounded is-small">Actualizar</a>
+					<a href="index.php?vista=dot_update&dotacion_id_up='.$rows['dot_cod'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-					<a href="'.$url.$pagina.'&product_id_del='.$rows['her_cod'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+					<a href="'.$url.$pagina.'&dotacion_id_del='.$rows['dot_cod'].'" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>
                 </tr>
             ';

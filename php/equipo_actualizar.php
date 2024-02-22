@@ -3,38 +3,37 @@
 	require_once "main.php";
 
 	/*== Almacenando id ==*/
-    $codigo=limpiar_cadena($_POST['her_cod']);
+    $serial=limpiar_cadena($_POST['equi_serial']);
 
 
     /*== Verificando producto ==*/
-	$check_producto=conexion();
-	$check_producto=$check_producto->query("SELECT * FROM herramientas WHERE her_cod='$codigo'");
+	$check_equipo=conexion();
+	$check_equipo=$check_equipo->query("SELECT * FROM equipos WHERE equi_serial='$serial'");
 
-    if($check_producto->rowCount()<=0){
+    if($check_equipo->rowCount()<=0){
     	echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El producto no existe en el sistema
+                El equipo no existe en el sistema
             </div>
         ';
         exit();
     }else{
-    	$datos=$check_producto->fetch();
+    	$datos=$check_equipo->fetch();
     }
-    $check_producto=null;
+    $check_equipo=null;
 
 
     /*== Almacenando datos ==*/
-    $cod=limpiar_cadena($_POST['her_cod']);
-
-	$descripcion=limpiar_cadena($_POST['her_descripcion']);
-	$estado=limpiar_cadena($_POST['her_estado']);
-	$fecha_entrada=limpiar_cadena($_POST['her_fecha_entrada']);
-    $fecha_entrega=limpiar_cadena($_POST['her_fecha_entrega']);
+    $seri=limpiar_cadena($_POST['equi_serial']);
+	$numerosalida=limpiar_cadena($_POST['equi_numero_salida']);
+	$fecha_entrega=limpiar_cadena($_POST['equi_fecha_entrega']);
+	$descripcion=limpiar_cadena($_POST['equi_descripcion']);
+	$estado=limpiar_cadena($_POST['equi_estado']);
 
 
 	/*== Verificando campos obligatorios ==*/
-    if($cod=="" || $descripcion=="" || $estado=="" || $fecha_entrada=="" || $fecha_entrega==""){
+    if($seri=="" || $numerosalida=="" || $fecha_entrega==""|| $descripcion=="" || $estado==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -46,7 +45,7 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,15}",$cod)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{1,50}",$seri)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -55,10 +54,7 @@
         ';
         exit();
     }
-
-    
-
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$descripcion)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$numerosalida)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -68,69 +64,52 @@
         exit();
     }
 
-    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$estado)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
-    if(verificar_datos("[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})",$fecha_entrada)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
     if(verificar_datos("[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})",$fecha_entrega)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                El NOMBRE no coincide con el formato solicitado
             </div>
         ';
         exit();
     }
 
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,150}",$descripcion)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El STOCK no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$estado)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El ESTADO no coincide con el formato solicitado
+            </div>  
+        ';
+        exit();
+    }
+    
 
+    /*== Verificando serial ==*/
 
-    /*== Verificando codigo ==*/
-    if($codigo!=$datos['her_cod']){
-	    $check_codigo=conexion();
-	    $check_codigo=$check_codigo->query("SELECT her_cod FROM herramientas WHERE her_cod='$codigo'");
-	    if($check_codigo->rowCount()>0){
+	    $check_serial=conexion();
+	    $check_serial=$check_serial->query("SELECT equi_serial FROM equipos WHERE equi_serial='$serial1'");
+	    if($check_serial->rowCount()>0){
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El CODIGO de BARRAS ingresado ya se encuentra registrado, por favor elija otro
+	                El SERIAL ingresado ya se encuentra registrado, por favor elija otro
 	            </div>
 	        ';
 	        exit();
 	    }
-	    $check_codigo=null;
-    }
+	    $check_serial=null;
 
-
-    /*== Verificando nombre ==
-    if($nombre!=$datos['producto_nombre']){
-	    $check_nombre=conexion();
-	    $check_nombre=$check_nombre->query("SELECT producto_nombre FROM producto WHERE producto_nombre='$nombre'");
-	    if($check_nombre->rowCount()>0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El NOMBRE ingresado ya se encuentra registrado, por favor elija otro
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_nombre=null;
-    }
-    */
+    
 
 
     /*== Verificando categoria ==
@@ -151,23 +130,24 @@
 */
 
     /*== Actualizando datos ==*/
-    $actualizar_producto=conexion();
-    $actualizar_producto=$actualizar_producto->prepare("UPDATE herramientas SET her_cod=:codigo,her_descripcion=:descripcion,her_estado=:estado,her_fecha_entrada=:fecha_entrada, her_fecha_entrega=:fecha_entrega WHERE her_cod=:codigo");
+    $actualizar_equipo=conexion();
+    $actualizar_equipo=$actualizar_equipo->prepare("UPDATE equipos SET equi_serial=:serial1,equi_numero_salida=:numero_salida,equi_fecha_entrega=:fecha_entrega,equi_descripcion=:descripcion,equi_estado=:estado WHERE equi_serial=:seri");
 
     $marcadores=[
-        ":codigo"=>$cod,
+        ":serial1"=>$seri,
+        ":numero_salida"=>$numerosalida,
+        ":fecha_entrega"=>$fecha_entrega,
         ":descripcion"=>$descripcion,
-        ":estado"=>$estado,
-        ":fecha_entrada"=>$fecha_entrada,
-        ":fecha_entrega"=>$fecha_entrega
+        ":estado"=>$estado
+
     ];
 
 
 
-    if($actualizar_producto->execute($marcadores)){
+    if($actualizar_equipo->execute($marcadores)){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡PRODUCTO ACTUALIZADO!</strong><br>
+                <strong>¡EQUIPO ACTUALIZADO!</strong><br>
                 El producto se actualizo con exito
             </div>
         ';
@@ -175,8 +155,8 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo actualizar el producto, por favor intente nuevamente
+                No se pudo actualizar el equipo, por favor intente nuevamente
             </div>
         ';
     }
-    $actualizar_producto=null;
+    $actualizar_equipo=null;

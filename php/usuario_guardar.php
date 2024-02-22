@@ -3,18 +3,20 @@
     require_once "main.php";
 
     /*== Almacenando datos ==*/
-    $nombre=limpiar_cadena($_POST['usuario_nombre']);
-    $apellido=limpiar_cadena($_POST['usuario_apellido']);
+    $cedula = limpiar_cadena($_POST['emple_cedula']);
+    $nombre=limpiar_cadena($_POST['emple_nombre']);
+    $primerapellido=limpiar_cadena($_POST['emple_primer_apellido']);
 
-    $usuario=limpiar_cadena($_POST['usuario_usuario']);
-    $email=limpiar_cadena($_POST['usuario_email']);
+    $segundoapellido=limpiar_cadena($_POST['emple_segundo_apellido']);
+    $estado=limpiar_cadena($_POST['emple_estado']);
 
-    $clave_1=limpiar_cadena($_POST['usuario_clave_1']);
-    $clave_2=limpiar_cadena($_POST['usuario_clave_2']);
+    $cargo=limpiar_cadena($_POST['emple_cargo']);
+    $telefono=limpiar_cadena($_POST['emple_telefono']);
+    $categoria=limpiar_cadena($_POST['dot_cod']);
 
 
     /*== Verificando campos obligatorios ==*/
-    if($nombre=="" || $apellido=="" || $usuario=="" || $clave_1=="" || $clave_2==""){
+    if($cedula=="" ||$nombre=="" || $primerapellido=="" || $segundoapellido==""|| $estado==""||$cargo=="" || $telefono=="" || $categoria== ""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -26,7 +28,63 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}",$nombre)){
+    if(verificar_datos("[/^[0-9]+$/]{1,11}",$cedula)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$nombre)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    
+
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$primerapellido)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El APELLIDO no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,50}",$segundoapellido)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$estado)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,30}",$cargo)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El NOMBRE no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[/^[0-9]+$/]{1,11}",$telefono)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -36,38 +94,8 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}",$apellido)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El APELLIDO no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
 
-    if(verificar_datos("[a-zA-Z0-9]{4,20}",$usuario)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El USUARIO no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
-
-    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_1) || verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_2)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                Las CLAVES no coinciden con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
-
-
-    /*== Verificando email ==*/
+    /*== Verificando email ==
     if($email!=""){
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
             $check_email=conexion();
@@ -95,21 +123,39 @@
 
 
     /*== Verificando usuario ==*/
-    $check_usuario=conexion();
-    $check_usuario=$check_usuario->query("SELECT usuario_usuario FROM usuario WHERE usuario_usuario='$usuario'");
-    if($check_usuario->rowCount()>0){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El USUARIO ingresado ya se encuentra registrado, por favor elija otro
-            </div>
-        ';
-        exit();
+    if($usuario!=$datos['emple_cedula']){
+	    $check_usuario=conexion();
+	    $check_usuario=$check_usuario->query("SELECT emple_cedula FROM empleados WHERE emple_cedula='$cedula'");
+	    if($check_usuario->rowCount()>0){
+	        echo '
+	            <div class="notification is-danger is-light">
+	                <strong>¡Ocurrio un error inesperado!</strong><br>
+	                El USUARIO ingresado ya se encuentra registrado, por favor elija otro
+	            </div>
+	        ';
+	        exit();
+	    }
+	    $check_usuario=null;
     }
     $check_usuario=null;
+    /*== Verificando categoria ==*/
+    if($categoria!=$datos['dot_cod']){
+	    $check_categoria=conexion();
+	    $check_categoria=$check_categoria->query("SELECT dot_cod FROM dotaciones WHERE dot_cod='$categoria'");
+	    if($check_categoria->rowCount()<=0){
+	        echo '
+	            <div class="notification is-danger is-light">
+	                <strong>¡Ocurrio un error inesperado!</strong><br>
+	                La categoría seleccionada no existe
+	            </div>
+	        ';
+	        exit();
+	    }
+	    $check_categoria=null;
+    }
 
 
-    /*== Verificando claves ==*/
+    /*== Verificando claves ==
     if($clave_1!=$clave_2){
         echo '
             <div class="notification is-danger is-light">
@@ -125,14 +171,17 @@
 
     /*== Guardando datos ==*/
     $guardar_usuario=conexion();
-    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO usuario(usuario_nombre,usuario_apellido,usuario_usuario,usuario_clave,usuario_email) VALUES(:nombre,:apellido,:usuario,:clave,:email)");
+    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO empleados(emple_cedula,emple_nombre,emple_primer_apellido,emple_segundo_apellido,emple_estado,emple_cargo,emple_telefono,dot_cod) VALUES(:cedula,:nombre,:primer_apellido,:segundo_apellido,:estado,:cargo,:telefono,:categoria)");
 
     $marcadores=[
+        ":cedula"=>$cedula,
         ":nombre"=>$nombre,
-        ":apellido"=>$apellido,
-        ":usuario"=>$usuario,
-        ":clave"=>$clave,
-        ":email"=>$email
+        ":primer_apellido"=>$primerapellido,
+        ":segundo_apellido"=>$segundoapellido,
+        ":estado"=>$estado,
+        ":cargo"=>$cargo,
+        ":telefono"=>$telefono,
+        ":categoria"=>$categoria
     ];
 
     $guardar_usuario->execute($marcadores);
@@ -140,7 +189,7 @@
     if($guardar_usuario->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡USUARIO REGISTRADO!</strong><br>
+                <strong>¡TECNICO REGISTRADO!</strong><br>
                 El usuario se registro con exito
             </div>
         ';
@@ -148,7 +197,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo registrar el usuario, por favor intente nuevamente
+                No se pudo registrar el tecnico, por favor intente nuevamente
             </div>
         ';
     }

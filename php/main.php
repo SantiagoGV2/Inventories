@@ -2,20 +2,20 @@
 	
 	# Conexion a la base de datos #
 	function conexion(){
-		$pdo = new PDO('mysql:host=localhost;dbname=inventario3', 'root', '');
+		$pdo = new PDO('mysql:host=localhost;dbname=inventario', 'root', '');
 		return $pdo;
 	}
 
 
 	# Verificar datos #
-	function verificar_datos($filtro,$cadena){
-		$filtro = preg_quote($filtro, '/');
-		if(preg_match("/^".$filtro."$/", $cadena)){
-			return false;
-        }else{
-            return true;
-        }
+	function verificar_datos($filtro, $cadena){
+		if (preg_match('/' . $filtro . '$/', $cadena)) {
+			return true; // Hay una coincidencia
+		} else {
+			return false; // No hay coincidencia
+		}
 	}
+	
 
 
 	# Limpiar cadenas de texto #

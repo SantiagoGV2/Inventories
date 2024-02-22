@@ -1,6 +1,6 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Productos</h1>
-    <h2 class="subtitle">Lista de productos</h2>
+    <h1 class="title">Equipos</h1>
+    <h2 class="subtitle">Lista de Equipos</h2>
 </div>
 
 <div class="container pb-6 pt-6">
@@ -8,8 +8,8 @@
         require_once "./php/main.php";
 
         # Eliminar producto #
-        if(isset($_GET['user_id_del'])){
-            require_once "./php/usuario_eliminar.php";
+        if(isset($_GET['equi_id_del'])){
+            require_once "./php/equipo_eliminar.php";
         }
 
         if(!isset($_GET['page'])){
@@ -20,15 +20,12 @@
                 $pagina=1;
             }
         }
-
-        $categoria_id = (isset($_GET['dot_descripcion'])) ? $_GET['dot_descripcion'] : 0;
-
         $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=user_list&page="; /* <== */
+        $url="index.php?vista=equi_list&page="; /* <== */
         $registros=15;
         $busqueda="";
 
         # Paginador producto #
-        require_once "./php/usuario_lista.php";
+        require_once "./php/equipo_lista.php";
     ?>
 </div>
