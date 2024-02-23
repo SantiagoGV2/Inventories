@@ -1,13 +1,13 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Productos</h1>
-    <h2 class="subtitle">Lista de productos</h2>
+    <h1 class="title">Usuarios</h1>
+    <h2 class="subtitle">Lista de usuarios</h2>
 </div>
 
-<div class="container pb-6 pt-6">
+<div class="container pb-6 pt-6">  
     <?php
         require_once "./php/main.php";
 
-        # Eliminar producto #
+        # Eliminar usuario #
         if(isset($_GET['user_id_del'])){
             require_once "./php/usuario_eliminar.php";
         }
@@ -21,14 +21,16 @@
             }
         }
 
-        $categoria_id = (isset($_GET['dot_descripcion'])) ? $_GET['dot_descripcion'] : 0;
-
-        $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=user_list&page="; /* <== */
+        $pagina=
+        
+        
+        
+        ($pagina);
+        $url="index.php?vista=user_list&page=";
         $registros=15;
         $busqueda="";
 
-        # Paginador producto #
+        # Paginador usuario #
         require_once "./php/usuario_lista.php";
     ?>
 </div>

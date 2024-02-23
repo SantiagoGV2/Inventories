@@ -15,6 +15,17 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
 
+        <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Usuarios</a>
+
+                <div class="navbar-dropdown">
+                    <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
+                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+                </div>
+            </div>
+
+
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link"> Equipos Claro</a>
 
@@ -29,13 +40,13 @@
                 <a class="navbar-link">Tecnicos y Auxiliares</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=user_new" class="navbar-item">Nueva</a>
-                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=category_list" class="navbar-item">Registro Herramientas</a>
-                    <a href="index.php?vista=category_list" class="navbar-item">Lista Herramientas</a>
-                    <a href="index.php?vista=category_list" class="navbar-item">Registro Equipos</a>
-                    <a href="index.php?vista=category_list" class="navbar-item">Lista Equipos</a>
-                    <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=emple_new" class="navbar-item">Nueva</a>
+                    <a href="index.php?vista=emple_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=her_emple_new" class="navbar-item">Registro Herramientas</a>
+                    <a href="index.php?vista=her_emple_list" class="navbar-item">Lista Herramientas</a>
+                    <a href="index.php?vista=equi_emple_new" class="navbar-item">Registro Equipos</a>
+                    <a href="index.php?vista=equi_emple_list" class="navbar-item">Lista Equipos</a>
+                    <a href="index.php?vista=equi_emple_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
 

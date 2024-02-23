@@ -1,81 +1,59 @@
 <div class="container is-fluid mb-6">
-	<h1 class="title">Productos</h1>
-	<h2 class="subtitle">Nuevo producto</h2>
+	<h1 class="title">Usuarios</h1>
+	<h2 class="subtitle">Nuevo usuario</h2>
 </div>
-
 <div class="container pb-6 pt-6">
-	<?php
-		require_once "./php/main.php";
-	?>
 
 	<div class="form-rest mb-6 mt-6"></div>
 
-	<form action="./php/usuario_guardar.php" method="POST" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data" >
+	<form action="./php/usuario_guardar.php" method="POST" class="FormularioAjax" autocomplete="off" >
 		<div class="columns">
 		  	<div class="column">
 		    	<div class="control">
-					<label>Cedula</label>
-				  	<input class="input" type="number" name="emple_cedula" pattern="[/^[0-9]+$/]{1,11}" maxlength="11" required >
+					<label>Nombre</label>
+				  	<input class="input" type="text" name="usu_nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required >
 				</div>
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Nombre</label>
-				  	<input class="input" type="text" name="emple_nombre" pattern="[/^[\p{L}\s]+$/u]{3,100}" maxlength="100" required >
+					<label>Primer Apellidos</label>
+				  	<input class="input" type="text" name="usu__primer_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required >
+				</div>
+		  	</div>
+              <div class="column">
+		    	<div class="control">
+					<label>Segubdo Apellidos</label>
+				  	<input class="input" type="text" name="usu_segundo_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required >
 				</div>
 		  	</div>
 		</div>
 		<div class="columns">
 		  	<div class="column">
 		    	<div class="control">
-					<label>Primer Apellido</label>
-				  	<input class="input" type="text" name="emple_primer_apellido" pattern="[/^[\p{L}\s]+$/u]{3,50}" maxlength="50" required >
+					<label>Usuario</label>
+				  	<input class="input" type="text" name="usu_usuario" pattern="[a-zA-Z0-9]{4,100}" maxlength="100" required >
 				</div>
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Segundo Apellido</label>
-				  	<input class="input" type="text" name="emple_segundo_apellido" pattern="[/^[\p{L}\s]+$/u]{3,50}" maxlength="50" required >
+					<label>Email</label>
+				  	<input class="input" type="email" name="usu_email" maxlength="100" >
 				</div>
 		  	</div>
-			  <div class="column">
+		</div>
+		<div class="columns">
+		  	<div class="column">
 		    	<div class="control">
-					<label>Estado</label>
-				  	<input class="input" type="text" name="emple_estado" pattern="[/^[\p{L}\s]+$/u]{3,30}" maxlength="30" required >
-				</div>
-		  	</div>
-			  <div class="column">
-		    	<div class="control">
-					<label>Cargo</label>
-				  	<input class="input" type="text" name="emple_cargo" pattern="[/^[\p{L}\s]+$/u]{3,30}" maxlength="30" required >
-				</div>
-		  	</div>
-			  <div class="column">
-		    	<div class="control">
-					<label>Telefono</label>
-				  	<input class="input" type="number" name="emple_telefono" pattern="[/^[0-9]+$/]{1,11}" maxlength="11" required >
+					<label>Clave</label>
+				  	<input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required >
 				</div>
 		  	</div>
 		  	<div class="column">
-				<label>Dotacion</label><br>
-		    	<div class="select is-rounded">
-				  	<select name="dot_cod" >
-				    	<option value="" selected="" >Seleccione una opción</option>
-				    	<?php
-    						$categorias=conexion();
-    						$categorias=$categorias->query("SELECT * FROM dotaciones");
-    						if($categorias->rowCount()>0){
-    							$categorias=$categorias->fetchAll();
-    							foreach($categorias as $row){
-    								echo '<option value="'.$row['dot_cod'].'" >'.$row['dot_descripcion'].'</option>';
-				    			}
-				   			}
-				   			$categorias=null;
-				    	?>
-				  	</select>
+		    	<div class="control">
+					<label>Repetir clave</label>
+				  	<input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required >
 				</div>
 		  	</div>
-			
 		</div>
 		<p class="has-text-centered">
 			<button type="submit" class="button is-info is-rounded">Guardar</button>

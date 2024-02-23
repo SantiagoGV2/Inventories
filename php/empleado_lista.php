@@ -4,15 +4,15 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM usuarios WHERE ((usu_id!='".$_SESSION['id']."') AND (usu_nombre LIKE '%$busqueda%' OR usu_primer_apellido LIKE '%$busqueda%' OR usu_segundo_apellido LIKE '%$busqueda%' OR usu_usuario LIKE '%$busqueda%' OR usu_email LIKE '%$busqueda%')) ORDER BY usu_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM empleados WHERE emple_cedula AND emple_cedula LIKE '%$busqueda%' OR emple_nombre LIKE '%$busqueda%' OR emple_primer_apellido LIKE '%$busqueda%' OR emple_segundo_apellido LIKE '%$busqueda%' OR emple_cargo LIKE '%$busqueda%')) ORDER BY emple_nombre ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(usu_id) FROM usuarios WHERE ((usu_id!='".$_SESSION['id']."') AND (usu_nombre LIKE '%$busqueda%' OR usua_primer_apellido LIKE '%$busqueda%' OR usu_segundo_apellido LIKE '%$busqueda%' OR usu_usuario LIKE '%$busqueda%' OR usu_email LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(emple_cedula) FROM empleados WHERE emple_cedula AND (emple_cedula LIKE '%$busqueda%' OR emple_primer_apellido LIKE '%$busqueda%' OR emple_nombre LIKE '%$busqueda%' OR emple_cargo LIKE '%$busqueda%'))";
 
 	}else{
 
-		$consulta_datos="SELECT * FROM usuarios WHERE usu_id!='".$_SESSION['id']."' ORDER BY usu_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM empleados WHERE emple_cedula ORDER BY emple_nombre ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(usu_id) FROM usuarios WHERE usu_id!='".$_SESSION['id']."'";
+		$consulta_total="SELECT COUNT(emple_cedula) FROM empleados WHERE emple_cedula";
 		
 	}
 
@@ -31,12 +31,14 @@
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
                 <tr class="has-text-centered">
-                	<th>#ID</th>
+                	<th>Cedula</th>
                     <th>Nombre</th>
-                    <th>Primer Apellidos</th>
+                    <th>Primer Apellido</th>
                     <th>Segundo Apellido</th>
-                    <th>Usuario</th>
-                    <th>Email</th>
+                    <th>Estado</th>
+					<th>Cargo</th>
+					<th>Telefono</th>
+					<th>Categoria</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -49,21 +51,22 @@
 		foreach($datos as $rows){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td>'.$contador.'</td>
-                    <td>'.$rows['usu_nombre'].'</td>
-                    <td>'.$rows['usu_primer_apellido'].'</td>
-                    <td>'.$rows['usu_segundo_apellido'].'</td>
-                    <td>'.$rows['usu_usuario'].'</td>
-                    <td>'.$rows['usu_email'].'</td>
+					<td>'.$rows['emple_cedula'].'</td>
+                    <td>'.$rows['emple_nombre'].'</td>
+                    <td>'.$rows['emple_primer_apellido'].'</td>
+                    <td>'.$rows['emple_segundo_apellido'].'</td>
+                    <td>'.$rows['emple_estado'].'</td>
+					<td>'.$rows['emple_cargo'].'</td>
+					<td>'.$rows['emple_telefono'].'</td>
+					<td>'.$rows['dot_cod'].'</td>
                     <td>
-                        <a href="index.php?vista=user_update&user_id_up='.$rows['usu_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
+                        <a href="index.php?vista=emple_update&emple_id_up='.$rows['emple_cedula'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="'.$url.$pagina.'&user_id_del='.$rows['usu_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+                        <a href="'.$url.$pagina.'&emple_id_del='.$rows['emple_cedula'].'" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>
                 </tr>
             ';
-            $contador++;
 		}
 		$pag_final=$contador-1;
 	}else{

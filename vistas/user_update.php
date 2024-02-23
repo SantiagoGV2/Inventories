@@ -1,100 +1,109 @@
+<?php
+	require_once "./php/main.php";
+
+    $id = (isset($_GET['user_id_up'])) ? $_GET['user_id_up'] : 0;
+    $id=limpiar_cadena($id);
+?>
 <div class="container is-fluid mb-6">
-	<h1 class="title">Productos</h1>
-	<h2 class="subtitle">Actualizar producto</h2>
+	<?php if($id==$_SESSION['id']){ ?>
+		<h1 class="title">Mi cuenta</h1>
+		<h2 class="subtitle">Actualizar datos de cuenta</h2>
+	<?php }else{ ?>
+		<h1 class="title">Usuarios</h1>
+		<h2 class="subtitle">Actualizar usuario</h2>
+	<?php } ?>
 </div>
 
 <div class="container pb-6 pt-6">
 	<?php
+
 		include "./inc/btn_back.php";
 
-		require_once "./php/main.php";
+        /*== Verificando usuario ==*/
+    	$check_usuario=conexion();
+    	$check_usuario=$check_usuario->query("SELECT * FROM usuarios WHERE usu_id='$id'");
 
-		$cedu = (isset($_GET['user_id_up'])) ? $_GET['user_id_up'] : 0;
-		$cedu =limpiar_cadena($cedu);
-
-		/*== Verificando producto ==*/
-    	$check_producto=conexion();
-    	$check_producto=$check_producto->query("SELECT * FROM empleados WHERE emple_cedula='$cedu'");
-
-        if($check_producto->rowCount()>0){
-        	$datos=$check_producto->fetch();
+        if($check_usuario->rowCount()>0){
+        	$datos=$check_usuario->fetch();
 	?>
 
 	<div class="form-rest mb-6 mt-6"></div>
-	
-	<h2 class="title has-text-centered"><?php echo $datos['emple_nombre']; ?></h2>
 
 	<form action="./php/usuario_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off" >
 
-		<input type="hidden" name="emple_cedula" value="<?php echo $datos['emple_cedula']; ?>" required >
-
+		<input type="hidden" name="usu_id" value="<?php echo $datos['usu_id']; ?>" required >
+		
 		<div class="columns">
 		  	<div class="column">
 		    	<div class="control">
-					<label>Cedula</label>
-				  	<input class="input" type="number" name="emple_cedula" pattern="[/^[0-9]+$/]{1,11}" maxlength="11" required >
+					<label>Nombres</label>
+				  	<input class="input" type="text" name="usu_nombre" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required value="<?php echo $datos['usu_nombre']; ?>" >
 				</div>
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Nombre</label>
-				  	<input class="input" type="text" name="emple_nombre" pattern="[/^[\p{L}\s]+$/u]{3,100}" maxlength="100" required >
+					<label>Primer Apellidos</label>
+				  	<input class="input" type="text" name="usu_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required value="<?php echo $datos['usu_primer_apellido']; ?>" >
+				</div>
+		  	</div>
+              <div class="column">
+		    	<div class="control">
+					<label>Segundo Apellidos</label>
+				  	<input class="input" type="text" name="usu_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}" maxlength="100" required value="<?php echo $datos['usu_segundo_apellido']; ?>" >
 				</div>
 		  	</div>
 		</div>
 		<div class="columns">
 		  	<div class="column">
 		    	<div class="control">
-					<label>Primer Apellido</label>
-				  	<input class="input" type="text" name="emple_primer_apellido" pattern="[/^[\p{L}\s]+$/u]{3,50}" maxlength="50" required >
+					<label>Usuario</label>
+				  	<input class="input" type="text" name="usu_usuario" pattern="[a-zA-Z0-9]{4,100}" maxlength="100" required value="<?php echo $datos['usua_usuario']; ?>" >
 				</div>
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Segundo Apellido</label>
-				  	<input class="input" type="text" name="emple_segundo_apellido" pattern="[/^[\p{L}\s]+$/u]{3,50}" maxlength="50" required >
+					<label>Email</label>
+				  	<input class="input" type="email" name="usu_email" maxlength="100" value="<?php echo $datos['usu_email']; ?>" >
 				</div>
 		  	</div>
-			  <div class="column">
+		</div>
+		<br><br>
+		<p class="has-text-centered">
+			SI desea actualizar la clave de este usuario por favor llene los 2 campos. Si NO desea actualizar la clave deje los campos vacíos.
+		</p>
+		<br>
+		<div class="columns">
+			<div class="column">
 		    	<div class="control">
-					<label>Estado</label>
-				  	<input class="input" type="text" name="emple_estado" pattern="[/^[\p{L}\s]+$/u]{3,30}" maxlength="30" required >
+					<label>Clave</label>
+				  	<input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
 				</div>
 		  	</div>
-			  <div class="column">
+		  	<div class="column">
 		    	<div class="control">
-					<label>Cargo</label>
-				  	<input class="input" type="text" name="emple_cargo" pattern="[/^[\p{L}\s]+$/u]{3,30}" maxlength="30" required >
+					<label>Repetir clave</label>
+				  	<input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
 				</div>
 		  	</div>
-			  <div class="column">
+		</div>
+		<br><br><br>
+		<p class="has-text-centered">
+			Para poder actualizar los datos de este usuario por favor ingrese su USUARIO y CLAVE con la que ha iniciado sesión
+		</p>
+		<div class="columns">
+		  	<div class="column">
 		    	<div class="control">
-					<label>Telefono</label>
-				  	<input class="input" type="number" name="emple_telefono" pattern="[/^[0-9]+$/]{1,11}" maxlength="11" required >
-				</div>
-				<div class="column">
-				<label>Dotacion</label><br>
-		    	<div class="select is-rounded">
-				  	<select name="dot_cod" >
-				    	<?php
-    						$categorias=conexion();
-    						$categorias=$categorias->query("SELECT * FROM dotaciones");
-    						if($categorias->rowCount()>0){
-    							$categorias=$categorias->fetchAll();
-    							foreach($categorias as $row){
-    								if($datos['dot_cod']==$row['dot_cod']){
-    									echo '<option value="'.$row['dot_cod'].'" selected="" >'.$row['dot_descripcion'].' (Actual)</option>';
-    								}else{
-    									echo '<option value="'.$row['dot_cod'].'" >'.$row['dot_descripcion'].'</option>';
-    								}
-				    			}
-				   			}
-				   			$categorias=null;
-				    	?>
-				  	</select>
+					<label>Usuario</label>
+				  	<input class="input" type="text" name="administrador_usuario" pattern="[a-zA-Z0-9]{4,100}" maxlength="100" required >
 				</div>
 		  	</div>
+		  	<div class="column">
+		    	<div class="control">
+					<label>Clave</label>
+				  	<input class="input" type="password" name="administrador_clave" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required >
+				</div>
 		  	</div>
+		</div>
 		<p class="has-text-centered">
 			<button type="submit" class="button is-success is-rounded">Actualizar</button>
 		</p>
@@ -103,6 +112,6 @@
 		}else{
 			include "./inc/error_alert.php";
 		}
-		$check_producto=null;
+		$check_usuario=null;
 	?>
 </div>
