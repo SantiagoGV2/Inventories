@@ -41,7 +41,7 @@
     }
 
     /*== Verificando integridad de los datos (admin) ==*/
-    if(verificar_datos("[a-zA-Z0-9]{4,100}",$admin_usuario)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$admin_usuario)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -51,7 +51,7 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$admin_clave)){
+    if(verificar_datos("[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/]",$admin_clave)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -200,7 +200,7 @@
 
     /*== Verificando claves ==*/
     if($clave_1!="" || $clave_2!=""){
-    	if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_1) || verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_2)){
+    	if(verificar_datos("[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/]",$clave_1) || verificar_datos("[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/]",$clave_2)){
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>

@@ -4,24 +4,24 @@
 	require_once "main.php";
 
     /*== Almacenando id ==*/
-    $cedu=limpiar_cadena($_POST['emple_cedula']);
+    $id=limpiar_cadena($_POST['emple_epp_id']);
 
     /*== Verificando usuario ==*/
-	$check_empleado=conexion();
-	$check_empleado=$check_empleado->query("SELECT * FROM empleados WHERE emple_cedula ='$cedu'");
+	$check_epp_emple=conexion();
+	$check_epp_emple=$check_her_emple->query("SELECT * FROM emple_epps WHERE emple_epp_id ='$id'");
 
-    if($check_empleado->rowCount()<=0){
+    if($check_her_emple->rowCount()<=0){
     	echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El Tecnico no existe en el sistema
+                El Registro no existe en el sistema
             </div>
         ';
         exit();
     }else{
-    	$datos=$check_empleado->fetch();
+    	$datos=$check_epp_emple->fetch();
     }
-    $check_empleado=null;
+    $check_epp_emple=null;
 
 
     /*== Almacenando datos del administrador ==
@@ -92,21 +92,11 @@
 
 */
     /*== Almacenando datos del usuario ==*/
-    $cedula = limpiar_cadena($_POST['emple_cedula']);
-    $nombre=limpiar_cadena($_POST['emple_nombre']);
-    $primerapellido=limpiar_cadena($_POST['emple_primer_apellido']);
-
-    $segundoapellido=limpiar_cadena($_POST['emple_segundo_apellido']);
-    $estado=limpiar_cadena($_POST['emple_estado']);
-
-    $cargo=limpiar_cadena($_POST['emple_cargo']);
-    $telefono=limpiar_cadena($_POST['emple_telefono']);
-    $categoria1=limpiar_cadena($_POST['dot_cod']);
-    $categoria2=limpiar_cadena($_POST['usu_id']);
-
+    $categoria1 = limpiar_cadena($_POST['emple_cedula']);
+    $categoria2=limpiar_cadena($_POST['epp_cod']);
 
     /*== Verificando campos obligatorios del usuario ==*/
-    if($cedula=="" ||$nombre=="" || $primerapellido=="" || $segundoapellido==""|| $estado==""||$cargo=="" || $telefono==""|| $categoria1== ""|| $categoria2==""){
+    if($categoria1=="" ||$categoria2=="" ){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -117,7 +107,7 @@
     }
 
 
-    /*== Verificando integridad de los datos (usuario) ==*/
+    /*== Verificando integridad de los datos (usuario) ==
     if(verificar_datos("[/^[0-9]+$/]{1,11}",$cedula)){
         echo '
             <div class="notification is-danger is-light">
@@ -184,7 +174,7 @@
         exit();
     }
 
-
+    */
     /*== Verificando email ==
     if($email!="" && $email!=$datos['usuario_email']){
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -256,23 +246,9 @@
     	$clave=$datos['usuario_clave'];
     }
     /*== Verificando categoria ==*/
-    if($categoria!=$datos['dot_cod']){
+    if($categoria!=$datos['emple_cedula']){
 	    $check_categoria=conexion();
-	    $check_categoria=$check_categoria->query("SELECT dot_cod FROM dotaciones WHERE dot_cod='$categoria1'");
-	    if($check_categoria->rowCount()<=0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_categoria=null;
-    }
-    if($categoria!=$datos['usu_id']){
-	    $check_categoria=conexion();
-	    $check_categoria=$check_categoria->query("SELECT usu_id FROM usuarios WHERE usu_id='$categoria2'");
+	    $check_categoria=$check_categoria->query("SELECT emple_cedula FROM empleados WHERE emple_cedula='$categoria1'");
 	    if($check_categoria->rowCount()<=0){
 	        echo '
 	            <div class="notification is-danger is-light">
@@ -285,25 +261,32 @@
 	    $check_categoria=null;
     }
 
+    if($categoria!=$datos['epp_cod']){
+	    $check_categoria=conexion();
+	    $check_categoria=$check_categoria->query("SELECT epp_cod FROM epps WHERE epp_cod='$categoria2'");
+	    if($check_categoria->rowCount()<=0){
+	        echo '
+	            <div class="notification is-danger is-light">
+	                <strong>¡Ocurrio un error inesperado!</strong><br>
+	                La categoría seleccionada no existe
+	            </div>
+	        ';
+	        exit();
+	    }
+	    $check_categoria=null;
+    }
 
     /*== Actualizar datos ==*/
-    $actualizar_empleado=conexion();
-    $actualizar_empleado=$actualizar_empleado->prepare("UPDATE empleados SET emple_cedula=:cedula,emple_nombre=:nombre,emple_primer_apellido=:primer_apellido,emple_segundo_apellido=:segundo_apellido,emple_estado=:estado,emple_cargo=:cargo,emple_telefono=:telefono, dot_cod=:categoria1, usu_id=:categoria2 WHERE emple_cedula=:cedu");
+    $actualizar_epp_emple=conexion();
+    $actualizar_epp_emple=$actualizar_epp_emple->prepare("UPDATE emple_epps SET emple_cedula=:categoria1, epp_cod=:categoria2 WHERE emple_epp_id =:id");
 
     $marcadores=[
-        ":cedula"=>$cedula,
-        ":nombre"=>$nombre,
-        ":primer_apellido"=>$primerapellido,
-        ":segundo_apellido"=>$segundoapellido,
-        ":estado"=>$estado,
-        ":cargo"=>$cargo,
-        ":telefono"=>$telefono,
-        ":categoria1"=>$categoria,
+        ":categoria1"=>$categoria1,
         ":categoria2"=>$categoria2,
-        ":cedu"=>$cedula
+        ":id"=>$id
     ];
 
-    if($actualizar_empleado->execute($marcadores)){
+    if($actualizar_epp_emple->execute($marcadores)){
         echo '
             <div class="notification is-info is-light">
                 <strong>¡USUARIO ACTUALIZADO!</strong><br>
@@ -318,4 +301,4 @@
             </div>
         ';
     }
-    $actualizar_empelado=null;
+    $actualizar_epp_emple=null;

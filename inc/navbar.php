@@ -46,7 +46,8 @@
                     <a href="index.php?vista=her_emple_list" class="navbar-item">Lista Herramientas</a>
                     <a href="index.php?vista=equi_emple_new" class="navbar-item">Registro Equipos</a>
                     <a href="index.php?vista=equi_emple_list" class="navbar-item">Lista Equipos</a>
-                    <a href="index.php?vista=equi_emple_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=epp_emple_new" class="navbar-item">Registro EPPS</a>
+                    <a href="index.php?vista=epp_emple_list" class="navbar-item">Lista EPPS</a>
                 </div>
             </div>
 
@@ -68,12 +69,25 @@
                     <a href="index.php?vista=dot_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">EPPS</a>
+
+                <div class="navbar-dropdown">
+                    <a href="index.php?vista=epp_new" class="navbar-item">Nuevo</a>
+                    <a href="index.php?vista=epp_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=epp_search" class="navbar-item">Buscar</a>
+                </div>
+            </div>
 
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
+                    <a href="index.php?vista=user_update&user_id_up=<?php echo $_SESSION['id']; ?>" class="button is-primary is-rounded">
+                        Mi cuenta
+                    </a>
+
                     <a href="index.php?vista=logout" class="button is-link is-rounded">
                         Salir
                     </a>

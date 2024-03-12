@@ -7,13 +7,14 @@
     $primerapellido=limpiar_cadena($_POST['usu_primer_apellido']);
     $segundoapellido=limpiar_cadena($_POST['usu_segundo_apellido']);
     $usuario=limpiar_cadena($_POST['usu_usuario']);
+    $email=limpiar_cadena($_POST['usu_email']);
 
     $clave_1=limpiar_cadena($_POST['usuario_clave_1']);
     $clave_2=limpiar_cadena($_POST['usuario_clave_2']);
 
 
     /*== Verificando campos obligatorios ==*/
-    if($nombre=="" || $primerapellido=="" || $segundoapellido=="" || $usuario=="" || $clave_1=="" || $clave_2==""){
+    if($nombre=="" || $primerapellido=="" || $segundoapellido=="" || $usuario=="" || $email=="" || $clave_1=="" || $clave_2==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -25,7 +26,7 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}",$nombre)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$nombre)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -35,7 +36,7 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}",$primerapellido)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$primerapellido)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -44,7 +45,7 @@
         ';
         exit();
     }
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,100}",$segundoapellido)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$segundoapellido)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -54,7 +55,7 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-Z0-9]{4,100}",$usuario)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$usuario)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -64,7 +65,7 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_1) || verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_2)){
+    if(verificar_datos("[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/]",$clave_1) || verificar_datos("[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/]",$clave_2)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>

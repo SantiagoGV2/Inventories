@@ -10,7 +10,7 @@
 
 	<div class="form-rest mb-6 mt-6"></div>
 
-	<form action="./php/her_emple_guardar.php" method="POST" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data" >
+	<form action="./php/epp_emple_guardar.php" method="POST" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data" >
 		<div class="columns">
 		  	<div class="column">
 				<label>Cedula</label><br>
@@ -35,17 +35,17 @@
 		</div>
         <div class="columns">
 		  	<div class="column">
-				<label>herramienta</label><br>
+				<label>EPP</label><br>
 		    	<div class="select is-rounded">
-				  	<select name="her_cod" >
+				  	<select name="epp_cod" >
 				    	<option value="" selected="" >Seleccione una opción</option>
 				    	<?php
     						$categorias2=conexion();
-    						$categorias2=$categorias2->query("SELECT * FROM herramientas");
+    						$categorias2=$categorias2->query("SELECT * FROM epps");
     						if($categorias2->rowCount()>0){
     							$categorias2=$categorias2->fetchAll();
     							foreach($categorias2 as $row){
-    								echo '<option value="'.$row['her_cod'].'" >'.$row['her_descripcion'].'</option>';
+    								echo '<option value="'.$row['epp_cod'].'" >'.$row['epp_descripcion'].'</option>';
 				    			}
 				   			}
 				   			$categorias2=null;

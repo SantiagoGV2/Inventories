@@ -4,15 +4,15 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM emple_herramientas WHERE emple_her_id AND emple_her_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR her_cod LIKE '%$busqueda%')) ORDER BY emple_her_id ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM epps WHERE epp_cod AND epp_cod LIKE '%$busqueda%' OR epp_descripcion LIKE '%$busqueda%' OR epp_estado LIKE '%$busqueda%' OR epp_disponibilidad LIKE '%$busqueda%')) ORDER BY epp_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(emple_her_id) FROM emple_herramientas WHERE emple_her_id AND (emple_her_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR her_cod LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(epp_cod) FROM epps WHERE epp_cod AND epp_cod LIKE '%$busqueda%' OR epp_descripcion LIKE '%$busqueda%' OR epp_disponibilidad LIKE '%$busqueda%'))";
 
 	}else{
 
-		$consulta_datos="SELECT * FROM emple_herramientas WHERE emple_her_id ORDER BY emple_her_id ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM epps WHERE epp_cod ORDER BY epp_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(emple_her_id) FROM emple_herramientas WHERE emple_her_id";
+		$consulta_total="SELECT COUNT(epp_cod) FROM epps WHERE epp_cod";
 		
 	}
 
@@ -31,9 +31,11 @@
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
                 <tr class="has-text-centered">
-                	<th>#ID</th>
-                    <th>Cedula</th>
-                    <th>Herramienta</th>
+                	<th>Codigo</th>
+                    <th>Descripcion</th>
+                    <th>Disponibilidad</th>
+                    <th>Estado</th>
+					<th>Fecha Entrega</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -46,18 +48,19 @@
 		foreach($datos as $rows){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td>'.$contador.'</td>
-                    <td>'.$rows['emple_cedula'].'</td>
-                    <td>'.$rows['her_cod'].'</td>
+					<td>'.$rows['epp_cod'].'</td>
+                    <td>'.$rows['epp_descripcion'].'</td>
+                    <td>'.$rows['epp_disponibilidad'].'</td>
+					<td>'.$rows['epp_estado'].'</td>
+					<td>'.$rows['epp_fecha_entrega'].'</td>
                     <td>
-                        <a href="index.php?vista=her_emple_update&emple_her_id_up='.$rows['emple_her_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
+					<a href="index.php?vista=epp_update&epp_id_up='.$rows['epp_cod'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="'.$url.$pagina.'&her_id_del='.$rows['emple_her_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+					<a href="'.$url.$pagina.'&epp_id_del='.$rows['epp_cod'].'" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>
                 </tr>
             ';
-            $contador++;
 		}
 		$pag_final=$contador-1;
 	}else{
@@ -86,7 +89,7 @@
 	$tabla.='</tbody></table></div>';
 
 	if($total>0 && $pagina<=$Npaginas){
-		$tabla.='<p class="has-text-right">Mostrando usuarios <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
+		$tabla.='<p class="has-text-right">Mostrando Equipos <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
 	}
 
 	$conexion=null;

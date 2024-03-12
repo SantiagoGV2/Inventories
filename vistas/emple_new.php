@@ -75,6 +75,25 @@
 				  	</select>
 				</div>
 		  	</div>
+			  <div class="column">
+				<label>Usuario</label><br>
+		    	<div class="select is-rounded">
+				  	<select name="usu_id" >
+				    	<option value="" selected="" >Seleccione una opción</option>
+				    	<?php
+    						$categorias=conexion();
+    						$categorias=$categorias->query("SELECT * FROM usuarios");
+    						if($categorias->rowCount()>0){
+    							$categorias=$categorias->fetchAll();
+    							foreach($categorias as $row){
+    								echo '<option value="'.$row['usu_id'].'" >'.$row['usu_nombre'].'</option>';
+				    			}
+				   			}
+				   			$categorias=null;
+				    	?>
+				  	</select>
+				</div>
+		  	</div>
 			
 		</div>
 		<p class="has-text-centered">

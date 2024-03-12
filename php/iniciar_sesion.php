@@ -17,7 +17,7 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[a-zA-Z0-9]{4,100}",$usuario)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,100}",$usuario)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -27,7 +27,7 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave)){
+    if(verificar_datos("[/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/]",$clave)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -50,7 +50,7 @@
     		$_SESSION['nombre']=$check_user['usu_nombre'];
     		$_SESSION['primer_apellido']=$check_user['usu_primer_apellido'];
             $_SESSION['segundo_apellido']=$check_user['usu_segundo_apellido'];
-    		$_SESSION['usu']=$check_user['usu_usuario'];
+    		$_SESSION['usuario']=$check_user['usu_usuario'];
 
     		if(headers_sent()){
 				echo "<script> window.location.href='index.php?vista=home'; </script>";

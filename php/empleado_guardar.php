@@ -12,11 +12,13 @@
 
     $cargo=limpiar_cadena($_POST['emple_cargo']);
     $telefono=limpiar_cadena($_POST['emple_telefono']);
-    $categoria=limpiar_cadena($_POST['dot_cod']);
+    $categoria1=limpiar_cadena($_POST['dot_cod']);
+    $categoria2=limpiar_cadena($_POST['usu_id']);
+
 
 
     /*== Verificando campos obligatorios ==*/
-    if($cedula=="" ||$nombre=="" || $primerapellido=="" || $segundoapellido==""|| $estado==""||$cargo=="" || $telefono=="" || $categoria== ""){
+    if($cedula=="" ||$nombre=="" || $primerapellido=="" || $segundoapellido==""|| $estado==""||$cargo=="" || $telefono=="" || $categoria1== ""|| $categoria2==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -138,7 +140,21 @@
 	    $check_empleado=null;
     /*== Verificando categoria ==*/
 	    $check_categoria=conexion();
-	    $check_categoria=$check_categoria->query("SELECT dot_cod FROM dotaciones WHERE dot_cod='$categoria'");
+	    $check_categoria=$check_categoria->query("SELECT dot_cod FROM dotaciones WHERE dot_cod='$categoria1'");
+	    if($check_categoria->rowCount()<=0){
+	        echo '
+	            <div class="notification is-danger is-light">
+	                <strong>¡Ocurrio un error inesperado!</strong><br>
+	                La categoría seleccionada no existe
+	            </div>
+	        ';
+	        exit();
+	    }
+	    $check_categoria=null;
+
+        /*== Verificando categoria ==*/
+	    $check_categoria=conexion();
+	    $check_categoria=$check_categoria->query("SELECT usu_id FROM usuarios WHERE usu_id='$categoria2'");
 	    if($check_categoria->rowCount()<=0){
 	        echo '
 	            <div class="notification is-danger is-light">
@@ -168,7 +184,7 @@
 
     /*== Guardando datos ==*/
     $guardar_empleado=conexion();
-    $guardar_empleado=$guardar_empleado->prepare("INSERT INTO empleados(emple_cedula,emple_nombre,emple_primer_apellido,emple_segundo_apellido,emple_estado,emple_cargo,emple_telefono,dot_cod) VALUES(:cedula,:nombre,:primer_apellido,:segundo_apellido,:estado,:cargo,:telefono,:categoria)");
+    $guardar_empleado=$guardar_empleado->prepare("INSERT INTO empleados(emple_cedula,emple_nombre,emple_primer_apellido,emple_segundo_apellido,emple_estado,emple_cargo,emple_telefono,dot_cod,usu_id) VALUES(:cedula,:nombre,:primer_apellido,:segundo_apellido,:estado,:cargo,:telefono,:categoria1,:categoria2)");
 
     $marcadores=[
         ":cedula"=>$cedula,
@@ -178,7 +194,8 @@
         ":estado"=>$estado,
         ":cargo"=>$cargo,
         ":telefono"=>$telefono,
-        ":categoria"=>$categoria
+        ":categoria1"=>$categoria1,
+        ":categoria2"=>$categoria2
     ];
 
     $guardar_empleado->execute($marcadores);

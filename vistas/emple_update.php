@@ -77,11 +77,11 @@
 		    	<div class="select is-rounded">
 				  	<select name="dot_cod" >
 				    	<?php
-    						$categorias=conexion();
-    						$categorias=$categorias->query("SELECT * FROM dotaciones");
-    						if($categorias->rowCount()>0){
-    							$categorias=$categorias->fetchAll();
-    							foreach($categorias as $row){
+    						$categorias1=conexion();
+    						$categorias1=$categorias1->query("SELECT * FROM dotaciones");
+    						if($categorias1->rowCount()>0){
+    							$categorias1=$categorias1->fetchAll();
+    							foreach($categorias1 as $row){
     								if($datos['dot_cod']==$row['dot_cod']){
     									echo '<option value="'.$row['dot_cod'].'" selected="" >'.$row['dot_descripcion'].' (Actual)</option>';
     								}else{
@@ -89,7 +89,27 @@
     								}
 				    			}
 				   			}
-				   			$categorias=null;
+				   			$categorias1=null;
+				    	?>
+				  	</select>
+				</div>
+				
+		  	</div>
+			  <div class="column">
+				<label>Usuario</label><br>
+		    	<div class="select is-rounded">
+				  	<select name="usu_id" >
+				    	<option value="" selected="" >Seleccione una opción</option>
+				    	<?php
+    						$categorias2=conexion();
+    						$categorias2=$categorias2->query("SELECT * FROM usuarios");
+    						if($categorias2->rowCount()>0){
+    							$categorias2=$categorias2->fetchAll();
+    							foreach($categorias2 as $row){
+    								echo '<option value="'.$row['usu_id'].'" >'.$row['usu_nombre'].'</option>';
+				    			}
+				   			}
+				   			$categorias2=null;
 				    	?>
 				  	</select>
 				</div>

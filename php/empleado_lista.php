@@ -38,7 +38,8 @@
                     <th>Estado</th>
 					<th>Cargo</th>
 					<th>Telefono</th>
-					<th>Categoria</th>
+					<th>Categoria1</th>
+					<th>Categoria2</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -59,6 +60,7 @@
 					<td>'.$rows['emple_cargo'].'</td>
 					<td>'.$rows['emple_telefono'].'</td>
 					<td>'.$rows['dot_cod'].'</td>
+					<td>'.$rows['usu_id'].'</td>
                     <td>
                         <a href="index.php?vista=emple_update&emple_id_up='.$rows['emple_cedula'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>

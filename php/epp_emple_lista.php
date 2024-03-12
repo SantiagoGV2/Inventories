@@ -4,15 +4,15 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM usuarios WHERE ((usu_id!='".$_SESSION['id']."') AND (usu_nombre LIKE '%$busqueda%' OR usu_primer_apellido LIKE '%$busqueda%' OR usu_segundo_apellido LIKE '%$busqueda%' OR usu_usuario LIKE '%$busqueda%' OR usu_email LIKE '%$busqueda%')) ORDER BY usu_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM emple_epps WHERE emple_epp_id AND emple_epp_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR epp_cod LIKE '%$busqueda%')) ORDER BY emple_epp_id ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(usu_id) FROM usuarios WHERE ((usu_id!='".$_SESSION['id']."') AND (usu_nombre LIKE '%$busqueda%' OR usu_primer_apellido LIKE '%$busqueda%' OR usu_segundo_apellido LIKE '%$busqueda%' OR usu_usuario LIKE '%$busqueda%' OR usu_email LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(emple_epp_id) FROM emple_epps WHERE emple_epp_id AND (emple_epp_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR epp_cod LIKE '%$busqueda%'))";
 
 	}else{
 
-		$consulta_datos="SELECT * FROM usuarios WHERE usu_id!='".$_SESSION['id']."' ORDER BY usu_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM emple_epps WHERE emple_epp_id ORDER BY emple_epp_id ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(usu_id) FROM usuarios WHERE usu_id!='".$_SESSION['id']."'";
+		$consulta_total="SELECT COUNT(emple_epp_id) FROM emple_epps WHERE emple_epp_id";
 		
 	}
 
@@ -32,11 +32,8 @@
             <thead>
                 <tr class="has-text-centered">
                 	<th>#ID</th>
-                    <th>Nombre</th>
-                    <th>Primer Apellidos</th>
-                    <th>Segundo Apellido</th>
-                    <th>Usuario</th>
-                    <th>Email</th>
+                    <th>Cedula</th>
+                    <th>EPPS</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -50,16 +47,13 @@
 			$tabla.='
 				<tr class="has-text-centered" >
 					<td>'.$contador.'</td>
-                    <td>'.$rows['usu_nombre'].'</td>
-                    <td>'.$rows['usu_primer_apellido'].'</td>
-                    <td>'.$rows['usu_segundo_apellido'].'</td>
-                    <td>'.$rows['usu_usuario'].'</td>
-                    <td>'.$rows['usu_email'].'</td>
+                    <td>'.$rows['emple_cedula'].'</td>
+                    <td>'.$rows['epp_cod'].'</td>
                     <td>
-                        <a href="index.php?vista=user_update&user_id_up='.$rows['usu_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
+                        <a href="index.php?vista=epp_emple_update&emple_epp_id_up='.$rows['emple_epp_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="'.$url.$pagina.'&user_id_del='.$rows['usu_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+                        <a href="'.$url.$pagina.'&epp_id_del='.$rows['emple_epp_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>
                 </tr>
             ';
