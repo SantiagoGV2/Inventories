@@ -4,9 +4,9 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM epps WHERE epp_cod AND epp_cod LIKE '%$busqueda%' OR epp_descripcion LIKE '%$busqueda%' OR epp_estado LIKE '%$busqueda%' OR epp_disponibilidad LIKE '%$busqueda%')) ORDER BY epp_descripcion ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM epps WHERE ((epp_cod AND epp_cod LIKE '%$busqueda%' OR epp_descripcion LIKE '%$busqueda%' OR epp_estado LIKE '%$busqueda%' OR epp_disponibilidad LIKE '%$busqueda%')) ORDER BY epp_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(epp_cod) FROM epps WHERE epp_cod AND epp_cod LIKE '%$busqueda%' OR epp_descripcion LIKE '%$busqueda%' OR epp_disponibilidad LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(epp_cod) FROM epps WHERE epp_cod AND ((epp_cod LIKE '%$busqueda%' OR epp_descripcion LIKE '%$busqueda%' OR epp_disponibilidad LIKE '%$busqueda%'))";
 
 	}else{
 

@@ -18,7 +18,7 @@
     	if($eliminar_producto->rowCount()==1){
 	        echo '
 	            <div class="notification is-info is-light">
-	                <strong>¡PRODUCTO ELIMINADO!</strong><br>
+	                <strong>¡HERRAMIENTA ELIMINADA!</strong><br>
 	                Los datos del producto se eliminaron con exito
 	            </div>
 	        ';
@@ -26,7 +26,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                No se pudo eliminar el producto, por favor intente nuevamente
+	                No se pudo eliminar la herramienta, por favor intente nuevamente
 	            </div>
 	        ';
 	    }
@@ -35,7 +35,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRODUCTO que intenta eliminar no existe
+                La herramienta que intenta eliminar no existe
             </div>
         ';
     }

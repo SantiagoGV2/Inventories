@@ -1,6 +1,6 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Productos</h1>
-    <h2 class="subtitle">Lista de productos</h2>
+    <h1 class="title">Herramientas Empleados</h1>
+    <h2 class="subtitle">Lista de herramientas empleados</h2>
 </div>
 
 <div class="container pb-6 pt-6">
@@ -22,7 +22,7 @@
         }
 
         $categoria_id1 = (isset($_GET['emple_cedula'])) ? $_GET['emple_cedula'] : 0;
-        $categoria_id2 = (isset($_GET['her_cod'])) ? $_GET['her_cod'] : 0;
+        $categoria_id2 = (isset($_GET['her_descripcion'])) ? $_GET['her_descripcion'] : 0;
 
         $pagina=limpiar_cadena($pagina);
         $url="index.php?vista=her_emple_list&page="; /* <== */

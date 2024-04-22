@@ -4,9 +4,9 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM equipos WHERE equi_serial AND equi_serial LIKE '%$busqueda%' OR equi_serial LIKE '%$busqueda%' OR equi_descripcion LIKE '%$busqueda%' OR equi_numero_salida LIKE '%$busqueda%')) ORDER BY equi_descripcion ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM equipos WHERE ((equi_serial AND equi_serial LIKE '%$busqueda%' OR equi_estado LIKE '%$busqueda%' OR equi_descripcion LIKE '%$busqueda%' OR equi_numero_salida LIKE '%$busqueda%')) ORDER BY equi_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(equi_serial) FROM equipos WHERE equi_serial AND (equi_serial LIKE '%$busqueda%' OR equi_descripcion LIKE '%$busqueda%' OR equi_numero_serial LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(equi_serial) FROM equipos WHERE equi_serial AND ((equi_serial LIKE '%$busqueda%' OR equi_estado LIKE '%$busqueda%' OR equi_descripcion LIKE '%$busqueda%' OR equi_numero_salida LIKE '%$busqueda%'))";
 
 	}else{
 

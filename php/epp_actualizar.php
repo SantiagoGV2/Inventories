@@ -14,7 +14,7 @@
     	echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El producto no existe en el sistema
+                El epp no existe en el sistema
             </div>
         ';
         exit();
@@ -62,7 +62,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                LA DESCRIPCION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -71,7 +71,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                LA DISPONIBILIDAD no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -81,7 +81,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                El ESTADO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -90,7 +90,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA FECHA DE ENTREGA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -168,7 +168,7 @@
     if($actualizar_epp->execute($marcadores)){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡PRODUCTO ACTUALIZADO!</strong><br>
+                <strong>¡EPP ACTUALIZADO!</strong><br>
                 El producto se actualizo con exito
             </div>
         ';
@@ -176,7 +176,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo actualizar el producto, por favor intente nuevamente
+                No se pudo actualizar el epp, por favor intente nuevamente
             </div>
         ';
     }

@@ -4,9 +4,9 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM herramientas WHERE her_cod AND her_cod LIKE '%$busqueda%' OR her_fecha_entrada LIKE '%$busqueda%' OR her_fecha_entrega LIKE '%$busqueda%')) ORDER BY her_descripcion ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM herramientas WHERE ((her_cod AND her_cod LIKE '%$busqueda%' OR her_fecha_entrada LIKE '%$busqueda%' OR her_fecha_entrega LIKE '%$busqueda%'OR her_descripcion LIKE '%$busqueda%'OR her_estado LIKE '%$busqueda%')) ORDER BY her_descripcion ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(her_cod) FROM herramientas WHERE her_cod AND (her_cod LIKE '%$busqueda%' OR her_fecha_entrada LIKE '%$busqueda%' OR her_fecha_entrega LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(her_cod) FROM herramientas WHERE her_cod AND ((her_cod LIKE '%$busqueda%' OR her_fecha_entrada LIKE '%$busqueda%' OR her_fecha_entrega LIKE '%$busqueda%' OR her_descripcion LIKE '%$busqueda%' OR her_estado LIKE '%$busqueda%'))";
 
 	}else{
 

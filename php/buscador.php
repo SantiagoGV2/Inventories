@@ -1,22 +1,26 @@
 <?php
-	$modulo_buscador=limpiar_cadena($_POST['modulo_buscador']);
+$modulo_buscador = limpiar_cadena($_POST['modulo_buscador']);
 
-	$modulos=["usuario","categoria","producto"];
+$modulos = ["usuarios", "equipos", "empleados", "herramientas", "dotaciones", "epps"];
 
-	if(in_array($modulo_buscador, $modulos)){
-		
-		$modulos_url=[
-			"usuario"=>"user_search",
-			"categoria"=>"category_search",
-			"producto"=>"product_search"
-		];
+if (in_array($modulo_buscador, $modulos)) {
 
-		$modulos_url=$modulos_url[$modulo_buscador];
+    $modulos_url = [
+        "usuarios"=>"user_search",
+        "equipos"=>"equi_search",
+        "empleados"=>"emple_search",
+        "herramientas"=>"product_search",
+        "dotaciones"=>"dot_search",
+        "epps"=>"epp_search"
+    ];
 
-		$modulo_buscador="busqueda_".$modulo_buscador;
+    $modulos_url = $modulos_url[$modulo_buscador];
+
+    $modulo_buscador = "busqueda_".$modulo_buscador;
 
 
-		# Iniciar busqueda #
+  
+    # Iniciar busqueda 
 		if(isset($_POST['txt_buscador'])){
 
 			$txt=limpiar_cadena($_POST['txt_buscador']);
@@ -29,7 +33,7 @@
 		            </div>
 		        ';
 			}else{
-				if(verificar_datos("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}",$txt)){
+				if(verificar_datos("[/^[\p{L}\s]+$/u]{1,30}", $txt)){
 			        echo '
 			            <div class="notification is-danger is-light">
 			                <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -38,25 +42,23 @@
 			        ';
 			    }else{
 			    	$_SESSION[$modulo_buscador]=$txt;
-			    	header("Location: index.php?vista=$modulos_url",true,303); 
+			    	header("Location: index.php?vista=$modulos_url"); 
  					exit();  
 			    }
 			}
 		}
 
-
-		# Eliminar busqueda #
-		if(isset($_POST['eliminar_buscador'])){
-			unset($_SESSION[$modulo_buscador]);
-			header("Location: index.php?vista=$modulos_url",true,303); 
- 			exit();
-		}
-
-	}else{
-		echo '
+    // Eliminar búsqueda
+    if (isset($_POST['eliminar_buscador'])) {
+        unset($_SESSION[$modulo_buscador]);
+        header("Location: index.php?vista=$modulos_url");
+        exit();
+    }else {
+    echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No podemos procesar la peticion
+                No podemos procesar la petición
             </div>
         ';
-	}
+    }
+}

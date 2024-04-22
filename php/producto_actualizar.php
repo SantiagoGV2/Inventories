@@ -14,7 +14,7 @@
     	echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El producto no existe en el sistema
+                El herramienta no existe en el sistema
             </div>
         ';
         exit();
@@ -62,7 +62,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                LA DESCRIPCION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -72,7 +72,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                El ESTADO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -81,7 +81,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA FECHA ENTRADA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -90,7 +90,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA FECHA DE ENTREGA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -106,7 +106,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El CODIGO de BARRAS ingresado ya se encuentra registrado, por favor elija otro
+	                El CODIGO ingresado ya se encuentra registrado, por favor elija otro
 	            </div>
 	        ';
 	        exit();
@@ -115,40 +115,6 @@
     }
 
 
-    /*== Verificando nombre ==
-    if($nombre!=$datos['producto_nombre']){
-	    $check_nombre=conexion();
-	    $check_nombre=$check_nombre->query("SELECT producto_nombre FROM producto WHERE producto_nombre='$nombre'");
-	    if($check_nombre->rowCount()>0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El NOMBRE ingresado ya se encuentra registrado, por favor elija otro
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_nombre=null;
-    }
-    */
-
-
-    /*== Verificando categoria ==
-    if($categoria!=$datos['categoria_id']){
-	    $check_categoria=conexion();
-	    $check_categoria=$check_categoria->query("SELECT categoria_id FROM categoria WHERE categoria_id='$categoria'");
-	    if($check_categoria->rowCount()<=0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_categoria=null;
-    }
-*/
 
     /*== Actualizando datos ==*/
     $actualizar_producto=conexion();
@@ -167,7 +133,7 @@
     if($actualizar_producto->execute($marcadores)){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡PRODUCTO ACTUALIZADO!</strong><br>
+                <strong>¡HERRAMIENTA ACTUALIZADA!</strong><br>
                 El producto se actualizo con exito
             </div>
         ';
@@ -175,7 +141,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo actualizar el producto, por favor intente nuevamente
+                No se pudo actualizar la herramienta, por favor intente nuevamente
             </div>
         ';
     }

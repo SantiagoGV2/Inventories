@@ -40,7 +40,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El APELLIDO no coincide con el formato solicitado
+                El PRIMER APELLIDO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -49,7 +49,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El APELLIDO no coincide con el formato solicitado
+                El SEGUNDO APELLIDO no coincide con el formato solicitado
             </div>
         ';
         exit();

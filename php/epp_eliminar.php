@@ -18,7 +18,7 @@
     	if($eliminar_epp->rowCount()==1){
 	        echo '
 	            <div class="notification is-info is-light">
-	                <strong>¡HERRAMIENTA ASIGNADA ELIMINADA!</strong><br>
+	                <strong>EPP ASIGNADO ELIMINADO!</strong><br>
 	                Los datos del producto se eliminaron con exito
 	            </div>
 	        ';
@@ -26,7 +26,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                No se pudo eliminar la herramienta, por favor intente nuevamente
+	                No se pudo eliminar el epp, por favor intente nuevamente
 	            </div>
 	        ';
 	    }
@@ -35,7 +35,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El registro de la herramienta que intenta eliminar no existe
+                El registro de epp que intenta eliminar no existe
             </div>
         ';
     }

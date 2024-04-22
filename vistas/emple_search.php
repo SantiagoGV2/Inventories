@@ -11,7 +11,7 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_producto']) && empty($_SESSION['busqueda_producto'])){
+        if(!isset($_SESSION['busqueda_empleados']) && empty($_SESSION['busqueda_empleados'])){
     ?>
     <div class="columns">
         <div class="column">
@@ -34,7 +34,7 @@
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
                 <input type="hidden" name="modulo_buscador" value="producto"> 
                 <input type="hidden" name="eliminar_buscador" value="producto">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_producto']; ?>”</strong></p>
+                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_empleados']; ?>”</strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
             </form>
@@ -60,7 +60,7 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=emple_search&page="; /* <== */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_producto']; /* <== */
+            $busqueda=$_SESSION['busqueda_empleados']; /* <== */
 
             # Paginador producto #
             require_once "./php/empleado_lista.php";

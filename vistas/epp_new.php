@@ -1,6 +1,6 @@
 <div class="container is-fluid mb-6">
-	<h1 class="title">Equipos</h1>
-	<h2 class="subtitle">Nuevo Equipo</h2>
+	<h1 class="title">EPPS</h1>
+	<h2 class="subtitle">Nuevo EPP</h2>
 </div>
 
 <div class="container pb-6 pt-6">

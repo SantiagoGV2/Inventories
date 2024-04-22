@@ -4,9 +4,9 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM dotaciones WHERE dot_cod AND dot_cod LIKE '%$busqueda%' OR dot_cod LIKE '%$busqueda%' OR dot_estado LIKE '%$busqueda%' OR dot_fecha_entrega LIKE '%$busqueda%' OR dot_descripcion LIKE '%$busqueda%')) ORDER BY dot_estado ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM dotaciones WHERE ((dot_cod LIKE '%$busqueda%' OR dot_estado LIKE '%$busqueda%' OR dot_fecha_entrega LIKE '%$busqueda%' OR dot_observacion LIKE '%$busqueda%' OR dot_descripcion LIKE '%$busqueda%')) ORDER BY dot_estado ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(dot_cod) FROM dotaciones WHERE dot_cod AND (dot_cod LIKE '%$busqueda%' OR dot_estado LIKE '%$busqueda%' OR dot_fecha_entrega LIKE '%$busqueda%' OR dot_observacion LIKE '%$busqueda%' OR dot_descripcion LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(dot_cod) FROM dotaciones WHERE dot_cod AND ((dot_cod LIKE '%$busqueda%' OR dot_estado LIKE '%$busqueda%' OR dot_fecha_entrega LIKE '%$busqueda%' OR dot_observacion LIKE '%$busqueda%' OR dot_descripcion LIKE '%$busqueda%'))";
 
 	}else{
 

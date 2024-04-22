@@ -11,15 +11,15 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_producto']) && empty($_SESSION['busqueda_producto'])){
+        if(!isset($_SESSION['busqueda_equipos']) && empty($_SESSION['busqueda_equipos'])){
     ?>
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="producto">
+                <input type="hidden" name="modulo_buscador" value="equipos">
                 <div class="field is-grouped">
                     <p class="control is-expanded">
-                        <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
+                        <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[/^[\p{L}\s]+$/u]{1,30}" maxlength="30" >
                     </p>
                     <p class="control">
                         <button class="button is-info" type="submit">Buscar</button>
@@ -32,9 +32,9 @@
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="producto"> 
-                <input type="hidden" name="eliminar_buscador" value="producto">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_producto']; ?>”</strong></p>
+                <input type="hidden" name="modulo_buscador" value="equipos"> 
+                <input type="hidden" name="eliminar_buscador" value="equipos">
+                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_equipos']; ?>”</strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
             </form>
@@ -59,10 +59,10 @@
             $pagina=limpiar_cadena($pagina);
             $url="index.php?vista=equi_search&page="; /* <== */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_producto']; /* <== */
+            $busqueda=$_SESSION['busqueda_equipos']; /* <== */
 
             # Paginador producto #
-            require_once "./php/equipos_lista.php";
+            require_once "./php/equipo_lista.php";
         } 
     ?>
 </div>

@@ -19,33 +19,6 @@
         exit();
     }
 
-    /*== Verificando email ==
-    if($email!=""){
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $check_email=conexion();
-            $check_email=$check_email->query("SELECT usuario_email FROM usuario WHERE usuario_email='$email'");
-            if($check_email->rowCount()>0){
-                echo '
-                    <div class="notification is-danger is-light">
-                        <strong>¡Ocurrio un error inesperado!</strong><br>
-                        El correo electrónico ingresado ya se encuentra registrado, por favor elija otro
-                    </div>
-                ';
-                exit();
-            }
-            $check_email=null;
-        }else{
-            echo '
-                <div class="notification is-danger is-light">
-                    <strong>¡Ocurrio un error inesperado!</strong><br>
-                    Ha ingresado un correo electrónico no valido
-                </div>
-            ';
-            exit();
-        } 
-    }
-
-
     /*== Verificando categoria ==*/
  
 	    $check_categoria1=conexion();
@@ -54,7 +27,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
+	                La categoría CEDULA seleccionada no existe
 	            </div>
 	        ';
 	        exit();
@@ -69,27 +42,13 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
+	                La categoría CODIGO seleccionada no existe
 	            </div>
 	        ';
 	        exit();
 	    }
 	    $check_categoria2=null;
     
-
-
-    /*== Verificando claves ==
-    if($clave_1!=$clave_2){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                Las CLAVES que ha ingresado no coinciden
-            </div>
-        ';
-        exit();
-    }else{
-        $clave=password_hash($clave_1,PASSWORD_BCRYPT,["cost"=>10]);
-    }
 
 
     /*== Guardando datos ==*/
@@ -108,7 +67,7 @@
     if($guardar_her_emple->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡TECNICO REGISTRADO!</strong><br>
+                <strong>¡HERRAMIENTA DEL EMPLEADO REGISTRADO!</strong><br>
                 El usuario se registro con exito
             </div>
         ';
@@ -116,7 +75,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo registrar el tecnico, por favor intente nuevamente
+                No se pudo registrar la herramienta del empleado, por favor intente nuevamente
             </div>
         ';
     }

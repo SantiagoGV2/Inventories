@@ -37,7 +37,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El CODIGO de BARRAS no coincide con el formato solicitado
+                LA DESCRIPCION de BARRAS no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -48,7 +48,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                El FECHA DE ENTREGA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -58,7 +58,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                El ESTADO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -67,7 +67,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA OBSERVACION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -214,14 +214,14 @@
     if($guardar_producto->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡DOTACION REGISTRADA!</strong><br>
-                La dotacion se registro con exito
+                <strong>¡DOTACIóN REGISTRADA!</strong><br>
+                La dotación se registro con exito
             </div>
         ';
     }else{
         echo '
         <div class="notification is-info is-light">
-            <strong>¡EROR NO SE RISTRO!</strong><br>
+            <strong>¡EROR NO SE REGISTRO LA DOTACIÓN!</strong><br>
         </div>
     ';
     }

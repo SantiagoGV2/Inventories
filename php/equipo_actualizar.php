@@ -49,7 +49,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El CODIGO de BARRAS no coincide con el formato solicitado
+                El SERIAL no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -58,7 +58,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                El NUMERO DE SALIDA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -68,7 +68,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                LA FECHA DE ENTREGA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -78,7 +78,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                El DESCRIPCION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -109,25 +109,6 @@
 	    }
 	    $check_serial=null;
 
-    
-
-
-    /*== Verificando categoria ==
-    if($categoria!=$datos['categoria_id']){
-	    $check_categoria=conexion();
-	    $check_categoria=$check_categoria->query("SELECT categoria_id FROM categoria WHERE categoria_id='$categoria'");
-	    if($check_categoria->rowCount()<=0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_categoria=null;
-    }
-*/
 
     /*== Actualizando datos ==*/
     $actualizar_equipo=conexion();
@@ -148,7 +129,7 @@
         echo '
             <div class="notification is-info is-light">
                 <strong>¡EQUIPO ACTUALIZADO!</strong><br>
-                El producto se actualizo con exito
+                El equipo se actualizo con exito
             </div>
         ';
     }else{

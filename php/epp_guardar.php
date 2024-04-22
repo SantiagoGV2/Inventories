@@ -36,7 +36,7 @@ if($cod=="" || $descripcion=="" || $disponibilidad==""|| $estado=="" || $fecha_e
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                LA DESCRIPCION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -45,7 +45,7 @@ if($cod=="" || $descripcion=="" || $disponibilidad==""|| $estado=="" || $fecha_e
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                LA DISPONIBILIDAD no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -55,7 +55,7 @@ if($cod=="" || $descripcion=="" || $disponibilidad==""|| $estado=="" || $fecha_e
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                El ESTADO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -64,7 +64,7 @@ if($cod=="" || $descripcion=="" || $disponibilidad==""|| $estado=="" || $fecha_e
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA FECHA DE ENTREGA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -78,7 +78,7 @@ if($cod=="" || $descripcion=="" || $disponibilidad==""|| $estado=="" || $fecha_e
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El SERIAL ingresado ya se encuentra registrado, por favor elija otro
+	                El CODIGO ingresado ya se encuentra registrado, por favor elija otro
 	            </div>
 	        ';
 	        exit();
@@ -213,14 +213,14 @@ if($cod=="" || $descripcion=="" || $disponibilidad==""|| $estado=="" || $fecha_e
     if($guardar_epp->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡EQUIPO REGISTRADA!</strong><br>
-                La dotacion se registro con exito
+                <strong>¡EPP REGISTRADO!</strong><br>
+                El epp se registro con exito
             </div>
         ';
     }else{
         echo '
         <div class="notification is-info is-light">
-            <strong>¡EROR NO SE RISTRO!</strong><br>
+            <strong>¡EROR NO SE REGISTRO!</strong><br>
         </div>
     ';
     }

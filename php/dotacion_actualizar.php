@@ -59,7 +59,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                La DESCRIPCION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -69,7 +69,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                La FECHA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -79,7 +79,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El PRECIO no coincide con el formato solicitado
+                El ESTADO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -89,7 +89,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El STOCK no coincide con el formato solicitado
+                LA OBSERVACION no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -167,15 +167,15 @@
     if($actualizar_dotacion->execute($marcadores)){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡DOTACION ACTUALIZADA!</strong><br>
-                El producto se actualizo con exito
+                <strong>¡DOTACIÓN ACTUALIZADA!</strong><br>
+                La dotación se actualizo con exito
             </div>
         ';
     }else{
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo actualizar la dotacion, por favor intente nuevamente
+                No se pudo actualizar la dotación, por favor intente nuevamente
             </div>
         ';
     }

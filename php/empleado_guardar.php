@@ -34,7 +34,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                LA CEDULA no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -54,7 +54,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El APELLIDO no coincide con el formato solicitado
+                El PRIMER APELLIDO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -63,7 +63,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                El SEGUNDO APELLIDO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -72,7 +72,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                El ESTADO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -81,7 +81,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                El CARGO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -90,7 +90,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El NOMBRE no coincide con el formato solicitado
+                El TELEFONO no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -132,7 +132,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El USUARIO ingresado ya se encuentra registrado, por favor elija otro
+	                El EMPLEADO ingresado ya se encuentra registrado, por favor elija otro
 	            </div>
 	        ';
 	        exit();
@@ -145,7 +145,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
+	                La categoría CODIGO seleccionada no existe
 	            </div>
 	        ';
 	        exit();
@@ -159,7 +159,7 @@
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
+	                La categoría USUARIO seleccionada no existe
 	            </div>
 	        ';
 	        exit();
@@ -203,7 +203,7 @@
     if($guardar_empleado->rowCount()==1){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡TECNICO REGISTRADO!</strong><br>
+                <strong>¡EMPLEADO REGISTRADO!</strong><br>
                 El usuario se registro con exito
             </div>
         ';
@@ -211,7 +211,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                No se pudo registrar el tecnico, por favor intente nuevamente
+                No se pudo registrar el empleado, por favor intente nuevamente
             </div>
         ';
     }

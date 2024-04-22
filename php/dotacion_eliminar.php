@@ -19,14 +19,14 @@
 	        echo '
 	            <div class="notification is-info is-light">
 	                <strong>¡DOTACION ELIMINADA!</strong><br>
-	                Los datos del producto se eliminaron con exito
+	                Los datos de la dotación se eliminaron con exito
 	            </div>
 	        ';
 	    }else{
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                No se pudo eliminar la dotacion, por favor intente nuevamente
+	                No se pudo eliminar la dotación, por favor intente nuevamente
 	            </div>
 	        ';
 	    }
@@ -35,7 +35,7 @@
         echo '
             <div class="notification is-dan8ger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                La dotacion que intenta eliminar no existe
+                La dotación que intenta eliminar no existe
             </div>
         ';
     }

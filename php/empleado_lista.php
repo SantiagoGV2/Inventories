@@ -38,8 +38,8 @@
                     <th>Estado</th>
 					<th>Cargo</th>
 					<th>Telefono</th>
-					<th>Categoria1</th>
-					<th>Categoria2</th>
+					<th>Dotación</th>
+					<th>Usuario</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>

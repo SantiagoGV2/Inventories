@@ -1,6 +1,6 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">EPPS</h1>
-    <h2 class="subtitle">Registro EPPS</h2>
+    <h1 class="title">EPPS Empleados</h1>
+    <h2 class="subtitle">Lista EPPS empleados</h2>
 </div>
 
 <div class="container pb-6 pt-6">

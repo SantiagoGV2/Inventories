@@ -19,14 +19,14 @@
 	        echo '
 	            <div class="notification is-info is-light">
 	                <strong>¡HERRAMIENTA ASIGNADA ELIMINADA!</strong><br>
-	                Los datos del producto se eliminaron con exito
+	                Los datos de la herramienta se eliminaron con exito
 	            </div>
 	        ';
 	    }else{
 	        echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                No se pudo eliminar la herramienta, por favor intente nuevamente
+	                No se pudo eliminar la herramienta asignada, por favor intente nuevamente
 	            </div>
 	        ';
 	    }
@@ -35,7 +35,7 @@
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El registro de la herramienta que intenta eliminar no existe
+                El registro de la herramienta asignada que intenta eliminar no existe
             </div>
         ';
     }

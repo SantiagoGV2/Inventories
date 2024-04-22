@@ -78,13 +78,27 @@
                     <a href="index.php?vista=epp_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">Inpecciones</a>
+
+                <div class="navbar-dropdown">
+                    <a href="index.php?vista=alturas" class="navbar-item">Equipos y trabajo seguro en altura</a>
+                    <a href="index.php?vista=botiquin" class="navbar-item">Botiquin</a>
+                    <a href="index.php?vista=dotacion" class="navbar-item">Dotación</a>
+                    <a href="index.php?vista=epps" class="navbar-item">EPPS</a>
+                    <a href="index.php?vista=escaleras" class="navbar-item">Escaleras</a>
+                    <a href="index.php?vista=kit_carretera" class="navbar-item">Kit Carretera</a>
+                    <a href="index.php?vista=moto" class="navbar-item">Motocicleta</a>
+                    <a href="index.php?vista=vehiculo" class="navbar-item">Vehiculo</a>
+                </div>
+            </div>
 
         </div>
 
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a href="index.php?vista=user_update&user_id_up=<?php echo $_SESSION['id']; ?>" class="button is-primary is-rounded">
+                    <a href="index.php?vista=user_update&user_id_up=<?php echo $_SESSION['id'];?>" class="button is-primary is-rounded">
                         Mi cuenta
                     </a>
 
