@@ -8,7 +8,7 @@
         require_once "./php/main.php";
 
         # Eliminar producto #
-        if(isset($_GET['her_id_del'])){
+        if(isset($_GET['equi_id_del'])){
             require_once "./php/equi_emple_eliminar.php";
         }
 

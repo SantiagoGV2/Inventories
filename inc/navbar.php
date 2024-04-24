@@ -1,8 +1,8 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
 
     <div class="navbar-brand">
-        <a href="index.php?vista=home">
-        <img src="./img/logo.jpeg" style="width: 100px ; height: 100px;">
+        <a href="http://localhost/INVENTARIO/index2.php?vista=login">
+        <img src="./img/movis.png" style="width: 100px ; height: 100px;">
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

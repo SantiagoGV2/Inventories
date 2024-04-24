@@ -86,7 +86,7 @@
         ';
         exit();
     }
-    if(verificar_datos("[/^[0-9]+$/]{1,11}",$telefono)){
+    if(verificar_datos("[/^[\p{L}\s]+$/u]{3,11}",$telefono)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -96,32 +96,6 @@
         exit();
     }
 
-
-    /*== Verificando email ==
-    if($email!=""){
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $check_email=conexion();
-            $check_email=$check_email->query("SELECT usuario_email FROM usuario WHERE usuario_email='$email'");
-            if($check_email->rowCount()>0){
-                echo '
-                    <div class="notification is-danger is-light">
-                        <strong>¡Ocurrio un error inesperado!</strong><br>
-                        El correo electrónico ingresado ya se encuentra registrado, por favor elija otro
-                    </div>
-                ';
-                exit();
-            }
-            $check_email=null;
-        }else{
-            echo '
-                <div class="notification is-danger is-light">
-                    <strong>¡Ocurrio un error inesperado!</strong><br>
-                    Ha ingresado un correo electrónico no valido
-                </div>
-            ';
-            exit();
-        } 
-    }
 
 
     /*== Verificando usuario ==*/
@@ -168,18 +142,7 @@
 
 
 
-    /*== Verificando claves ==
-    if($clave_1!=$clave_2){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                Las CLAVES que ha ingresado no coinciden
-            </div>
-        ';
-        exit();
-    }else{
-        $clave=password_hash($clave_1,PASSWORD_BCRYPT,["cost"=>10]);
-    }
+    
 
 
     /*== Guardando datos ==*/

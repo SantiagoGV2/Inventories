@@ -115,40 +115,7 @@
     }
 
 
-    /*== Verificando nombre ==
-    if($nombre!=$datos['producto_nombre']){
-	    $check_nombre=conexion();
-	    $check_nombre=$check_nombre->query("SELECT producto_nombre FROM producto WHERE producto_nombre='$nombre'");
-	    if($check_nombre->rowCount()>0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                El NOMBRE ingresado ya se encuentra registrado, por favor elija otro
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_nombre=null;
-    }
-    */
-
-
-    /*== Verificando categoria ==
-    if($categoria!=$datos['categoria_id']){
-	    $check_categoria=conexion();
-	    $check_categoria=$check_categoria->query("SELECT categoria_id FROM categoria WHERE categoria_id='$categoria'");
-	    if($check_categoria->rowCount()<=0){
-	        echo '
-	            <div class="notification is-danger is-light">
-	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                La categoría seleccionada no existe
-	            </div>
-	        ';
-	        exit();
-	    }
-	    $check_categoria=null;
-    }
-*/
+    
 
     /*== Actualizando datos ==*/
     $actualizar_epp=conexion();

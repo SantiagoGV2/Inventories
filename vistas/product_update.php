@@ -22,7 +22,7 @@
 
 	<div class="form-rest mb-6 mt-6"></div>
 	
-	<h2 class="title has-text-centered"><?php echo $datos['her_tipo']; ?></h2>
+	<h2 class="title has-text-centered"><?php echo $datos['her_descripcion']; ?></h2>
 
 	<form action="./php/producto_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off" >
 

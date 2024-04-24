@@ -53,7 +53,7 @@
 			  <div class="column">
 		    	<div class="control">
 					<label>Telefono</label>
-				  	<input class="input" type="number" name="emple_telefono" pattern="[/^[0-9]+$/]{1,11}" maxlength="11" required >
+				  	<input class="input" type="text" name="emple_telefono" pattern="[/^[\p{L}\s]+$/u]{3,11}" maxlength="11" required >
 				</div>
 		  	</div>
 		  	<div class="column">

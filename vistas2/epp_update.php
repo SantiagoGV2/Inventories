@@ -1,0 +1,73 @@
+<div class="container is-fluid mb-6">
+	<h1 class="title">EPPS</h1>
+	<h2 class="subtitle">Actualizar EPPS</h2>
+</div>
+
+<div class="container pb-6 pt-6">
+	<?php
+		include "./inc2/btn_back.php";
+
+		require_once "./php2/main2.php";
+
+		$codigo = (isset($_GET['epp_id_up'])) ? $_GET['epp_id_up'] : 0;
+		$codigo=limpiar_cadena($codigo);
+
+		/*== Verificando producto ==*/
+    	$check_epp=conexion();
+    	$check_epp=$check_epp->query("SELECT * FROM epps WHERE epp_cod='$codigo'");
+
+        if($check_epp->rowCount()>0){
+        	$datos=$check_epp->fetch();
+	?>
+
+	<div class="form-rest mb-6 mt-6"></div>
+	
+	<h2 class="title has-text-centered"><?php echo $datos['epp_descripcion']; ?></h2>
+
+	<form action="./php2/epp_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off" >
+
+		<input type="hidden" name="epp_cod" value="<?php echo $datos['epp_cod']; ?>" required >
+
+		<div class="columns">
+		  	<div class="column">
+		    	<div class="control">
+					<label>Codigo</label>
+				  	<input class="input" type="text" name="epp_cod" pattern="[/^[\p{L}\s]+$/u]{1,20}" maxlength="20" required value="<?php echo $datos['epp_cod']; ?>">
+				</div>
+		  	</div>
+		  	<div class="column">
+		    	<div class="control">
+					<label>Descripcion</label>
+				  	<input class="input" type="text" name="epp_descripcion" pattern="[/^[\p{L}\s]+$/u]{3,100}" maxlength="100" required value="<?php echo $datos['epp_descripcion']; ?>">
+				</div>
+		  	</div>
+		</div>
+		<div class="columns">
+		  	<div class="column">
+		    	<div class="control">
+					<label>Disponibilidad</label>
+				  	<input class="input" type="text" name="epp_disponibilidad" pattern="[/^[\p{L}\s]+$/u]{3,50}" maxlength="50" required value="<?php echo $datos['epp_disponibilidad']; ?>">
+				</div>
+		  	</div>
+		  	<div class="column">
+		    	<div class="control">
+					<label>Estado</label>
+				  	<input class="input" type="text" name="epp_estado" pattern="[/^[\p{L}\s]+$/u]{3,50}" maxlength="50" required value="<?php echo $datos['epp_estado']; ?>">
+				</div>
+				<div class="column">
+		    	<div class="control">
+					<label>Fecha Entrega</label>
+				  	<input class="input" type="date" name="epp_fecha_entrega" pattern="[0-9]{2}[/-][0-9]{2}[/-]([0-9]{2}|[0-9]{4})]" maxlength="15" required value="<?php echo $datos['epp_fecha_entrega']; ?>">
+				</div>
+		  	</div>
+		<p class="has-text-centered">
+			<button type="submit" class="button is-success is-rounded">Actualizar</button>
+		</p>
+	</form>
+	<?php 
+		}else{
+			include "./inc2/error_alert.php";
+		}
+		$check_epp=null;
+	?>
+</div>
