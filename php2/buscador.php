@@ -1,7 +1,7 @@
 <?php
 $modulo_buscador = limpiar_cadena($_POST['modulo_buscador']);
 
-$modulos = ["usuarios", "equipos", "empleados", "herramientas", "dotaciones", "epps"];
+$modulos = ["usuarios", "equipos", "empleados", "herramientas", "dotaciones", "epps", "emple_herramientas", "emple_equipos", "emple_epps"];
 
 if (in_array($modulo_buscador, $modulos)) {
 
@@ -11,7 +11,10 @@ if (in_array($modulo_buscador, $modulos)) {
         "empleados"=>"emple_search",
         "herramientas"=>"product_search",
         "dotaciones"=>"dot_search",
-        "epps"=>"epp_search"
+        "epps"=>"epp_search",
+        "emple_herramientas"=>"her_emple_search",
+        "emple_equipos"=>"equi_emple_search",
+        "emple_epps"=>"epp_emple_search"
     ];
 
     $modulos_url = $modulos_url[$modulo_buscador];

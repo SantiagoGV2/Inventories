@@ -4,9 +4,9 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM empleados WHERE emple_cedula AND emple_cedula LIKE '%$busqueda%' OR emple_nombre LIKE '%$busqueda%' OR emple_primer_apellido LIKE '%$busqueda%' OR emple_segundo_apellido LIKE '%$busqueda%' OR emple_cargo LIKE '%$busqueda%')) ORDER BY emple_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM empleados WHERE ((emple_cedula AND emple_cedula LIKE '%$busqueda%' OR emple_nombre LIKE '%$busqueda%' OR emple_primer_apellido LIKE '%$busqueda%' OR emple_segundo_apellido LIKE '%$busqueda%' OR emple_cargo LIKE '%$busqueda%')) ORDER BY emple_nombre ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(emple_cedula) FROM empleados WHERE emple_cedula AND (emple_cedula LIKE '%$busqueda%' OR emple_primer_apellido LIKE '%$busqueda%' OR emple_nombre LIKE '%$busqueda%' OR emple_cargo LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(emple_cedula) FROM empleados WHERE emple_cedula AND ((emple_cedula LIKE '%$busqueda%' OR emple_primer_apellido LIKE '%$busqueda%' OR emple_segundo_apellido LIKE '%$busqueda%' OR emple_nombre LIKE '%$busqueda%' OR emple_cargo LIKE '%$busqueda%'))";
 
 	}else{
 

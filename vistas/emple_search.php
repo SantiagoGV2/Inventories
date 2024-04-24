@@ -16,7 +16,7 @@
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="producto">
+                <input type="hidden" name="modulo_buscador" value="empleados">
                 <div class="field is-grouped">
                     <p class="control is-expanded">
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
@@ -32,8 +32,8 @@
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="producto"> 
-                <input type="hidden" name="eliminar_buscador" value="producto">
+                <input type="hidden" name="modulo_buscador" value="empleados"> 
+                <input type="hidden" name="eliminar_buscador" value="empleados">
                 <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_empleados']; ?>”</strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>

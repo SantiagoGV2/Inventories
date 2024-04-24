@@ -42,12 +42,19 @@
                 <div class="navbar-dropdown">
                     <a href="index2.php?vista=emple_new" class="navbar-item">Nueva</a>
                     <a href="index2.php?vista=emple_list" class="navbar-item">Lista</a>
+                    <a href="index2.php?vista=emple_search" class="navbar-item">Bucar Empleado</a>
+
                     <a href="index2.php?vista=her_emple_new" class="navbar-item">Registro Herramientas</a>
                     <a href="index2.php?vista=her_emple_list" class="navbar-item">Lista Herramientas</a>
+                    <a href="index2.php?vista=her_emple_search" class="navbar-item">Buscar Herramienta</a>
+
                     <a href="index2.php?vista=equi_emple_new" class="navbar-item">Registro Equipos</a>
                     <a href="index2.php?vista=equi_emple_list" class="navbar-item">Lista Equipos</a>
+                    <a href="index2.php?vista=equi_emple_search" class="navbar-item">Buscar Equipo</a>
+
                     <a href="index2.php?vista=epp_emple_new" class="navbar-item">Registro EPPS</a>
                     <a href="index2.php?vista=epp_emple_list" class="navbar-item">Lista EPPS</a>
+                    <a href="index2.php?vista=epp_emple_search" class="navbar-item">Buscar EPPS</a>
                 </div>
             </div>
 

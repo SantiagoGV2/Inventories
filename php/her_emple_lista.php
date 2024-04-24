@@ -4,9 +4,9 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM emple_herramientas WHERE emple_her_id AND emple_her_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR her_cod LIKE '%$busqueda%')) ORDER BY emple_her_id ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM emple_herramientas WHERE ((emple_her_id AND emple_her_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR her_cod LIKE '%$busqueda%')) ORDER BY emple_her_id ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(emple_her_id) FROM emple_herramientas WHERE emple_her_id AND (emple_her_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR her_cod LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(emple_her_id) FROM emple_herramientas WHERE emple_her_id AND ((emple_her_id LIKE '%$busqueda%' OR emple_cedula LIKE '%$busqueda%' OR her_cod LIKE '%$busqueda%'))";
 
 	}else{
 
