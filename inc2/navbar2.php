@@ -91,6 +91,7 @@
                 <div class="navbar-dropdown">
                     <a href="index2.php?vista=alturas" class="navbar-item">Equipos y trabajo seguro en altura</a>
                     <a href="index2.php?vista=botiquin" class="navbar-item">Botiquin</a>
+                    <a href="index2.php?vista=extintor" class="navbar-item">Extintor</a>
                     <a href="index2.php?vista=dotacion" class="navbar-item">Dotación</a>
                     <a href="index2.php?vista=epps" class="navbar-item">EPPS</a>
                     <a href="index2.php?vista=escaleras" class="navbar-item">Escaleras</a>
