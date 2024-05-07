@@ -15,12 +15,14 @@ const ctx = canvas.getContext("2d");
 
 // Event listener for the clear button
 function clearSignature1() {
-    event.preventDefault();
+    event.preventDefault(); 
     signaturePad.clear();
 }
 
 function exportToPdf() {
     event.preventDefault();
+    const pictures = document.getElementById("add-photo")
+    pictures.style.display = "none";
     const element = document.getElementById('content');
     const currentDate = new Date();
     const dateString = currentDate.toISOString().split('T')[0];
@@ -34,5 +36,6 @@ function exportToPdf() {
         jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
     });
     pdf.from(element).save();
-    
+
+    pictures.style.display = "none";
 }

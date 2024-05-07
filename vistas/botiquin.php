@@ -851,13 +851,13 @@
                 <label for="inspector-bot">RESPONSABLE DE LA INSPECCIÓN</label>
                 <input type="text" class="form-control" id="inspector-bot">
                 <hr>
-                <div class="container">
+                <div class="container" id="container-pictures">
                     <section id="Images" class="images-cards">
                         <form action="upload.php" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12" id="add-photo-container">
                                     <div class="add-new-photo first" id="add-photo">
-                                        <span><i class="icon-camera"></i></span>
+                                        <span id="icono" ><i class="icon-camera"></i></span>
                                     </div>
                                     <input type="file" multiple id="add-new-photo" name="images[]">
                                 </div>
