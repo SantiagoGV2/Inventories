@@ -2296,5 +2296,7 @@
 
     </div>
 </div>
-<button class=" btn btn-success d-grid gap-2 col-6 mx-auto m-2" id="clear-button1" onclick="clearSignature1()">Limpiar</button>
+
+<button class=" btn btn-success d-grid gap-2 col-6 mx-auto m-2" id="clear-button1" onclick="clearSignature1()">Limpiar Firma Empleado</button>
+<button class=" btn btn-success d-grid gap-2 col-6 mx-auto m-2" id="clear-button2" onclick="clearSignature2()">Limpiar Firma Supervisor</button>
 <button class=" btn btn-primary d-grid gap-2 col-6 mx-auto m-2" href="#" id="exportPdf" onclick="exportToPdf()">Guardar</button>
